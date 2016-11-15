@@ -6,10 +6,7 @@ public class cards {
 	private ArrayList<String> CommunityChest = new ArrayList<>();
 	private ArrayList<String> Chance = new ArrayList<>();
 	
-	public void main(String[] args) {
-		getcards();
-	}
-	private  cards(){
+	public cards(){
 		
 		Chance.add("Advance to Go (Collect $200)");
 		Chance.add("Advance to Illinois Ave. - If you pass Go, collect $200.");

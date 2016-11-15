@@ -8,6 +8,8 @@ public class monopolyRunner {
 		System.out.println("Monopoly is booted up.");
 		monoMenu mm = new monoMenu();
 		mm.menu();
+		cards card = new cards();
+		card.getcards();
 	}
 
 }

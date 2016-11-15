@@ -51,6 +51,10 @@ public class cards {
 		double communitychestindex = (Math.random()*CommunityChest.size());
 		String communitychestcard = CommunityChest.get((int) communitychestindex);
 		System.out.println(communitychestcard);
+		
+		double Chanceindex = (Math.random()*Chance.size());
+		String Chancecard = Chance.get((int) Chanceindex);
+		System.out.println(Chancecard);
 	}
 	
 }

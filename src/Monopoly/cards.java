@@ -12,17 +12,33 @@ public class cards {
 	// private ArrayList<String> CommunityChest = new ArrayList<>();
 	// private ArrayList<String> Chance = new ArrayList<>();
 	
-	public cards(String type){
-		text = type;
+	public cards(String words){
+		text = words;
 		setAction();
 		setType();
 	}
 	private void setAction(){
-		
+		if(text.contains("Advance")||text.contains("Go")){
+			action = "Move";
+		}
+		if(text.contains("Illinois")){
+			action = "Advance to Illinois";
+		}
+		if(text.contains("Collect")&& !action.equals("Move")||text.contains("pays")||text.contains("Recieve")||text.contains("inherit")||text.contains("sale")){
+			action = "Collect";
+		}
 	}
 	
 	private void setType(){
-	
+		if(action.equalsIgnoreCase("Move")&& text.contains("to Go")){
+			type =1;
+		}
+		else if(action.equalsIgnoreCase("Move")&& text.contains("Illinois")){
+			type = 2;
+		}
+		else if(action.equalsIgnoreCase("Collect")){
+			type = 3;
+		}
 	}
 //		Chance.add(new cards("Advance to Go (Collect $200)"));
 //		Chance.add("Advance to Go (Collect $200)");

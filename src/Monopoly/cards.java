@@ -3,9 +3,11 @@ package Monopoly;
 import java.util.ArrayList;
 
 public class cards {
+	private ArrayList<String> CommunityChest = new ArrayList<>();
+	private ArrayList<String> Chance = new ArrayList<>();
 	
-	private  cards(){
-		ArrayList<String> Chance = new ArrayList<>();
+	public cards(){
+		
 		Chance.add("Advance to Go (Collect $200)");
 		Chance.add("Advance to Illinois Ave. - If you pass Go, collect $200.");
 		Chance.add("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown.");
@@ -22,7 +24,8 @@ public class cards {
 		Chance.add("You have been elected Chairman of the Board – Pay each player $50");
 		Chance.add("Your building loan matures – Collect $150 ");
 		Chance.add("You have won a crossword competition - Collect $100");		
-		ArrayList<String> CommunityChest = new ArrayList<>();
+		
+		
 		CommunityChest.add("Advance to Go (Collect $200)");
 		CommunityChest.add("Bank error in your favor – Collect $200");
 		CommunityChest.add("Doctor's fees– Pay $50");
@@ -44,7 +47,14 @@ public class cards {
 
 	}
 	public void getcards(){
+	
+		double communitychestindex = (Math.random()*CommunityChest.size());
+		String communitychestcard = CommunityChest.get((int) communitychestindex);
+		System.out.println(communitychestcard);
 		
+		double Chanceindex = (Math.random()*Chance.size());
+		String Chancecard = Chance.get((int) Chanceindex);
+		System.out.println(Chancecard);
 	}
 	
 }

@@ -11,6 +11,7 @@ public class Deeds {
 	private int purchasePrice;
 	private int houseHotelPurchasePrice;
 	private int rent;
+	private int spaceOnBoard;
 
 	public int purchaseHouses() throws IOException {
 
@@ -35,16 +36,28 @@ public class Deeds {
 		return purchasePrice;
 	}
 
-	public boolean amITaken() {
+	public boolean amIOwned() {
 
-		return false;
+		if (owned) {
+			return true;
+		} else
+			return false;
 	}
 
 	public boolean take() {
 
 		return false;
 	}
+
+	public int rent() {
+
+		return rent;
+	}
 	
-	
+	public int spaceOnBoard() {
+		
+		
+		return spaceOnBoard;
+	}
 
 }

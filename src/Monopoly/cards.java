@@ -19,7 +19,7 @@ public class cards {
 	}
 
 	private void setAction() {
-		if (text.contains("Advance") || text.contains("Go") || text.contains("Take a trip")) {
+		if (text.contains("Advance") || text.contains("Go") || text.contains("Take a trip")||text.contains("Go to Jail")||text.contains("3 spaces")) {
 			action = "Move";
 		}
 		if (text.contains("Collect") && !action.equals("Move") || text.contains("dividend") || text.contains("Recieve")
@@ -32,12 +32,6 @@ public class cards {
 		if (text.contains("Get out of jail")) {
 			action = "Get out of jail";
 		}
-		if (text.contains("3 Spaces")) {
-			action = "Back 3";
-		}
-		if (text.contains("Go to Jail")) {
-			action = "Go to Jail";
-		}
 		if (text.contains("General repairs")) {
 			action = "General repairs";
 		}
@@ -47,7 +41,7 @@ public class cards {
 	}
 
 	private void setType() {
-		if (action.equalsIgnoreCase("Move") && text.contains("to Go")) {
+		if (action.equalsIgnoreCase("Move")) {
 			type = 1;
 		} else if (action.equalsIgnoreCase("Collect")) {
 			type = 2;
@@ -55,10 +49,6 @@ public class cards {
 			type = 3;
 		} else if (action.equalsIgnoreCase("Get out of jail")) {
 			type = 4;
-		} else if (action.equalsIgnoreCase("Back 3")) {
-			type = 5;
-		} else if (action.equalsIgnoreCase("Go to Jail")) {
-			type = 6;
 		} else if (action.equalsIgnoreCase("General Repairs")) {
 			type = 7;
 		} else if (action.equalsIgnoreCase("street repairs")) {

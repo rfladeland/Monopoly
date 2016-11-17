@@ -19,36 +19,18 @@ public class cards {
 	}
 
 	private void setAction() {
-		if (text.contains("Advance") || text.contains("Go")) {
+		if (text.contains("Advance") || text.contains("Go") || text.contains("Take a trip")||text.contains("Go to Jail")||text.contains("3 spaces")) {
 			action = "Move";
 		}
-		if (text.contains("Illinois")) {
-			action = "Advance to Illinois";
-		}
-		if (text.contains("Collect") && !action.equals("Move") || text.contains("pays") || text.contains("Recieve")
+		if (text.contains("Collect") && !action.equals("Move") || text.contains("dividend") || text.contains("Recieve")
 				|| text.contains("inherit") || text.contains("sale")) {
 			action = "Collect";
 		}
 		if (text.contains("Pay") && !action.equals("Collect") && !action.equals("Move")) {
 			action = "Pay";
 		}
-		if (text.contains("Utility")) {
-			action = "Utility";
-		}
-		if (text.contains("St. Charles")) {
-			action = "St. Charles";
-		}
-		if (text.contains("nearest railroad")) {
-			action = "nearest railroad";
-		}
 		if (text.contains("Get out of jail")) {
 			action = "Get out of jail";
-		}
-		if (text.contains("3 Spaces")) {
-			action = "Back 3";
-		}
-		if (text.contains("Go to Jail")) {
-			action = "Go to Jail";
 		}
 		if (text.contains("General repairs")) {
 			action = "General repairs";
@@ -56,43 +38,21 @@ public class cards {
 		if (text.contains("street repairs")) {
 			action = "street repairs";
 		}
-		if (text.contains("Reading railroad")) {
-			action = "Take a trip";
-		}
-		if (text.contains("Boardwalk")) {
-			action = "take a walk";
-		}
 	}
 
 	private void setType() {
-		if (action.equalsIgnoreCase("Move") && text.contains("to Go")) {
+		if (action.equalsIgnoreCase("Move")) {
 			type = 1;
-		} else if (action.equalsIgnoreCase("Move") && text.contains("Illinois")) {
-			type = 2;
 		} else if (action.equalsIgnoreCase("Collect")) {
-			type = 3;
+			type = 2;
 		} else if (action.equalsIgnoreCase("Pay")) {
-			type = 4;
-		} else if (action.equalsIgnoreCase("Utility")) {
-			type = 5;
-		} else if (action.equalsIgnoreCase("St. Charles.")) {
-			type = 6;
-		} else if (action.equalsIgnoreCase("nearest railroad")) {
-			type = 7;
+			type = 3;
 		} else if (action.equalsIgnoreCase("Get out of jail")) {
-			type = 8;
-		} else if (action.equalsIgnoreCase("Back 3")) {
-			type = 8;
-		} else if (action.equalsIgnoreCase("Go to Jail")) {
-			type = 9;
+			type = 4;
 		} else if (action.equalsIgnoreCase("General Repairs")) {
-			type = 10;
+			type = 7;
 		} else if (action.equalsIgnoreCase("street repairs")) {
-			type = 10;
-		} else if (action.equalsIgnoreCase("Take a trip")) {
-			type = 11;
-		} else if (action.equalsIgnoreCase("Take a walk")) {
-			type = 12;
+			type = 8;
 		}
 	}
 	// Chance.add(new cards("Advance to Go (Collect $200)"));

@@ -153,9 +153,8 @@ public class monoMenu {
 			System.out.println("You must decide which option you will take before you add up your total worth.");
 		} else if (ruleSelect == 11) {
 			// explains jail
-			System.out.println("You land in Jail when... (1) your token lands on the space marked 'Go to "
-					+ "Jail'; (2) you draw a card marked 'Go to Jail'; ");
-			System.out.println("or (3) you thow doubles three times in succession");
+			System.out.println("You land in Jail when... \n (1) your token lands on the space marked 'Go to "
+					+ "Jail'; \n (2) you draw a card marked 'Go to Jail'; or \n (3) you thow doubles three times in succession");
 			System.out.println("");
 			System.out.println("When you are sent to Jail you cannot collect your $200 salary in that move "
 					+ "since, regardless of where your token is on the ");
@@ -163,14 +162,14 @@ public class monoMenu {
 					"board, you must move it directly into " + "Jail. Your turn ends when you are sent to Jail.");
 			System.out.println("");
 			System.out.println("If you are not 'sent' to Jail but in the ordinary course of play land on that "
-					+ "space, you are 'Jest Visiting', you incur no penalty, and you move ahead in the usual "
+					+ "space, you are 'Just Visiting', you incur no penalty, and you move ahead in the usual "
 					+ "manner on your next turn.");
 			System.out.println("");
-			System.out.println("You get out of Jail by... (1) throwing doubles on any of your next three turns; "
-					+ "if you succeed in doing this you immediately move forward the number of spaces shown by your "
-					+ "doubles throw; even though you had thrown doubles, you do not take another turn; (2) using "
-					+ "the 'Get Out of Jail Free' card if you have it; (3) purchasing the 'Get Out of Jail Free' card "
-					+ "from another player and playing it; (4) paying a fine of $50 before you roll the dice on either "
+			System.out.println("You get out of Jail by... \n (1) throwing doubles on any of your next three turns; "
+					+ "if you succeed in doing this you immediately move forward the\n     number of spaces shown by your "
+					+ "doubles throw; even though you had thrown doubles, you do not take another turn; \n (2) using "
+					+ "the 'Get Out of Jail Free' card if you have it; \n (3) purchasing the 'Get Out of Jail Free' card "
+					+ "from another player and playing it; \n (4) paying a fine of $50 before you roll the dice on either "
 					+ "of your next two turns.");
 			System.out.println("");
 			System.out.println("If you do not throw doubles by your third turn, you must pay the $50 fine. "

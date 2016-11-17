@@ -5,10 +5,10 @@ import java.io.IOException;
 import ConsoleUI.ConsoleUI;
 
 public class monopolyRunner {
-
+	private static monoMenu mm = new monoMenu();
 	public static void main(String[] args) throws IOException {
 		System.out.println("Monopoly is booted up.");
-		monoMenu mm = new monoMenu();
+		
 		mm.menu();
 //		cards card = new cards();
 //		card.getcards();
@@ -21,7 +21,7 @@ public class monopolyRunner {
 			userPlayAgain = ConsoleUI.promptForInput("Want to play again? Y/N?", false);
 			valid = true;
 			if (userPlayAgain.equalsIgnoreCase("Y")) {
-				menu();
+				mm.menu();
 				break;
 			}
 			if (userPlayAgain.equalsIgnoreCase("N")) {

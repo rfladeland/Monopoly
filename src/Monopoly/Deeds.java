@@ -5,13 +5,31 @@ import java.io.IOException;
 import ConsoleUI.ConsoleUI;
 
 public class Deeds {
-
+	
+	private String name = "";
+	private int location;
 	private int numOfHouses;
 	private int numOfHotels;
 	private int purchasePrice;
 	private int houseHotelPurchasePrice;
 	private int rent;
-
+	private int house1Rent;
+	private int house2Rent;
+	private int mortgage;
+	private boolean isTaken = false;
+	
+	public Deeds(String title, int loc, int price, int startRent, int costPerHouse, int house1, int house2, int house3, int house4, int hotel, int mortgagePrice){
+		name = title;
+		location = loc;
+		purchasePrice = price;
+		rent = startRent;
+		houseHotelPurchasePrice = costPerHouse;
+		house1Rent = house1;
+		
+		
+	}
+	
+	
 	public int purchaseHouses() throws IOException {
 
 		numOfHouses = ConsoleUI.promptForInt("How many houses would you like to purchase?", 0, 4);
@@ -37,12 +55,11 @@ public class Deeds {
 
 	public boolean amITaken() {
 
-		return false;
+		return isTaken;
 	}
 
-	public boolean take() {
-
-		return false;
+	public void takenFlip() {
+		isTaken = !isTaken;
 	}
 	
 	

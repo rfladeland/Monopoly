@@ -54,7 +54,7 @@ public class monoMenu {
 				System.out.println(" The object of the game is to become the wealthiest player through "
 						+ "buying, renting and selling property.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 2) {
@@ -67,7 +67,7 @@ public class monoMenu {
 				System.out.println("");
 				System.out.println(" All remaining money and other equipment go to the Bank.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 3) {
@@ -75,9 +75,9 @@ public class monoMenu {
 				System.out.println(" Select as Banker a player who will also make a good Auctioneer. \n A Banker "
 						+ "who plays in the game must keep his/her personal funds separate from those of the Bank. "
 						+ "\n When more than five persons play, the Banker may elect to act only as Banker and "
-						+ "Auctioneer. \n In this case the computer will be the Banker.");
+						+ "Auctioneer. \n In this case the computer will automatically be the Banker.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 4) {
@@ -93,7 +93,7 @@ public class monoMenu {
 				System.out.println(" The Bank never 'goes broke'. If the Bank runs out of money, the Banker may "
 						+ "issue as much more as needed by writing on\n any ordinary paper.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 5) {
@@ -114,7 +114,7 @@ public class monoMenu {
 						+ "Retaining the dice, throw again and move your token as before.\n If you throw doubles "
 						+ "three times in succession, move your token immediately to the space marked 'In Jail' (See Jail).");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 6) {
@@ -133,16 +133,16 @@ public class monoMenu {
 				ruleQuit = false;
 			} else if (ruleSelect == 7) {
 				// explains buying properties
-				System.out.println(" Whenever you land on an unowed property you may buy that property from the "
+				System.out.println(" Whenever you land on an unowned property you may buy that property from the "
 						+ "Bank at its printed price.\n You receive the Title Deed card showing ownership;\n place it "
-						+ "faceup in front of you.");
+						+ "face-up in front of you.");
 				System.out.println("");
 				System.out.println(" If you do not wish to buy the property, the Banker sells it at auction to the "
 						+ "highest bidder.\n They buyer pays the Bank the amount of the bid in cash and receives the "
 						+ "Title Deed card for that property.\n Any player, including the one who declined the option to "
 						+ "buy it at the printed price, may bid.\n Bidding may start at any price.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 8) {
@@ -151,7 +151,7 @@ public class monoMenu {
 						+ "from you in accordance with the list\n printed on its Title Deed card.");
 				System.out.println("");
 				System.out.println(" If the property is mortgaged, no rent can be collected.\n When a property is mortgaged, "
-						+ "its Title Deed card is placed facedown in front of the owner.");
+						+ "its Title Deed card is placed face-down in front of the owner.");
 				System.out.println("");
 				System.out.println(" It is an advantage to hold all the Title Deed cards in a color-group (e.g., "
 						+ "Boardwalk and Park Place; or Connecticut,\n Vermont and Oriental Avenue) because the owner may then charge "
@@ -163,7 +163,7 @@ public class monoMenu {
 				System.out.println(" The owner may not collect the rent if he/she fails to ask for it before the "
 						+ "second player following throws the dice.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 9) {
@@ -188,7 +188,7 @@ public class monoMenu {
 				System.out.println("");
 				System.out.println(" You must decide which option you will take before you add up your total worth.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 11) {
@@ -217,7 +217,7 @@ public class monoMenu {
 				System.out.println(" Even though you are in Jail, you may buy and sell property, buy and sell houses "
 						+ "and hotels and collect rents.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 12) {
@@ -225,7 +225,7 @@ public class monoMenu {
 				System.out.println(" A player landing on this place does not receive any money, property or reward of any "
 						+ "kind.\n This is just a 'free' resting place.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 13) {
@@ -253,7 +253,7 @@ public class monoMenu {
 				System.out.println(" As you build evenly, you must also break down evenly if you sell houses back "
 						+ "to the Bank (see Selling Property).");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 14) {
@@ -263,7 +263,7 @@ public class monoMenu {
 						+ "returns the four houses from that property to the Bank and pays the price for the hotel as "
 						+ "shown on the Title\n Deed card. Only one hotel may be erected on any one property.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 15) {
@@ -284,7 +284,7 @@ public class monoMenu {
 						+ "house at a time (one hotel equals five\n houses), evenly, in reverse of the manner in "
 						+ "which they were erected.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 16) {
@@ -307,7 +307,7 @@ public class monoMenu {
 						+ "you buy the property and if you lift\n the mortgage later you must pay the Bank an additional 10% "
 						+ "interest as well as the amount of the mortgage.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 17) {
@@ -327,16 +327,16 @@ public class monoMenu {
 								+ "\n In this case, the Bank immediately sells by auction all property so taken, except "
 								+ "buildings.\n A bankrupt player must immediately retire from the game.\n The last player left in the game wins.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else if (ruleSelect == 18) {
 				// explains miscellaneous
 				System.out.println(
-						" Money can be loaned to a player onnly by the Bank and then only by mortgaging property.\n No player may "
+						" Money can be loaned to a player only by the Bank and then only by mortgaging property.\n No player may "
 								+ "borrow from or lend money to another player.");
 				System.out.println("");
-				System.out.println("Press enter to go back to rule menu.");
+				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
 			} else {

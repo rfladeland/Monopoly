@@ -71,6 +71,12 @@ public class Deeds {
 
 	public void purchaseHouses() throws IOException {
 
+
+	}
+
+	public int purchaseHouses() throws IOException {
+
+
 		numOfHouses = ConsoleUI.promptForInt("How many houses would you like to purchase?", 0, 4);
 
 		purchasePrice = houseHotelPurchasePrice * numOfHouses;
@@ -104,6 +110,7 @@ public class Deeds {
 	public void takenFlip() {
 		isTaken = !isTaken;
 	}
+
 
 	public int rent() {
 

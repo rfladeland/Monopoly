@@ -5,10 +5,15 @@ import java.util.ArrayList;
 public class cards {
 	// Text on card
 	private String text = "";
-	// 1 = move to go
-	// 2 =
 	private int type = -1;
+	// 1 = move 
+	// 2 = collect
+	// 3 = pay
+	// 4 = Get out of Jail
+	// 5 = repairs 
 	private String action = "";
+	//depending on what the card is saying will determine what the action is eg. a card that wants you to pay an amount is set to "pay".
+	
 	// private ArrayList<String> CommunityChest = new ArrayList<>();
 	// private ArrayList<String> Chance = new ArrayList<>();
 
@@ -17,7 +22,7 @@ public class cards {
 		setAction();
 		setType();
 	}
-
+//sets the action depending on what the text is. eg. every instance you get money is set to collect.
 	private void setAction() {
 		if (text.contains("Advance") || text.contains("Go") || text.contains("Take a trip")||text.contains("Go to Jail")||text.contains("3 spaces")) {
 			action = "Move";
@@ -32,14 +37,11 @@ public class cards {
 		if (text.contains("Get out of jail")) {
 			action = "Get out of jail";
 		}
-		if (text.contains("General repairs")) {
+		if (text.contains("repairs")) {
 			action = "General repairs";
 		}
-		if (text.contains("street repairs")) {
-			action = "street repairs";
-		}
 	}
-
+//sets the type depending on what the action is. eg. the action move is set to type one.
 	private void setType() {
 		if (action.equalsIgnoreCase("Move")) {
 			type = 1;
@@ -49,10 +51,8 @@ public class cards {
 			type = 3;
 		} else if (action.equalsIgnoreCase("Get out of jail")) {
 			type = 4;
-		} else if (action.equalsIgnoreCase("General Repairs")) {
-			type = 7;
-		} else if (action.equalsIgnoreCase("street repairs")) {
-			type = 8;
+		} else if (action.equalsIgnoreCase(" Repairs")) {
+			type = 5;
 		}
 	}
 	// Chance.add(new cards("Advance to Go (Collect $200)"));
@@ -72,8 +72,8 @@ public class cards {
 	// Chance.add("Go Back 3 Spaces.");
 	// Chance.add("Go to Jail – Go directly to Jail – Do not pass Go, do not
 	// collect $200.");
-	// Chance.add("Make general repairs on all your property – For each house
-	// pay $25 – For each hotel $100");
+	// Chance.add("Make general repairs on all your property – $25 for each house
+	//  $100 for each hotel");
 	// Chance.add("Pay poor tax of $15");
 	// Chance.add("Take a trip to Reading Railroad – If you pass Go, collect
 	// $200");

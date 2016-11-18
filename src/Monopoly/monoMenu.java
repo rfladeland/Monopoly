@@ -11,19 +11,27 @@ public class monoMenu {
 	public void menu() throws IOException {
 		final int MAX_PLAYERS = 8;
 		final int MIN_PLAYERS = 2;
-		// String[] gamePieces = {"Thimble", "Dog", "Man On Horse",
-		// "Battleship", "Hat", "Cannon"};
 		String[] options = { "Rules", "Start", "Credits" };
 		boolean quit = false;
 		while (!quit) {
 			int menu = (ConsoleUI.promptForMenuSelection(options, true));
 			if (menu == 1) {
-				// put rules? I guess?
 				theRules();
 			} else if (menu == 2) {
 				// input players amount
 				int players = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
+				//ask each players entered what game piece they want
 				System.out.println("There are " + players + " players for this game.");
+				
+				//need to think on how I'm going to go about this vvv
+				for(int i = 1; i < players+1; i++){
+					gamePieces playerPiece = null;
+					System.out.println("Player " + i + ", What game piece do you want to play?");
+					System.out.println("Tokens you can play as: Horse Rider, Thimble, Cannon, Hat, Dog, "
+							+ "Battleship, Car, Iron, Shoe, Wheelbarrow");
+					String pieceChoice = in.readLine();
+					System.out.println("Player " + i + " chose " + playerPiece + ".");
+				}
 
 				// if players accepted ask what piece they want
 			} else if (menu == 3) {

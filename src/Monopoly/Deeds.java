@@ -25,6 +25,7 @@ public class Deeds {
 	private int mortgage;
 	private boolean isTaken = false;
 
+	// House deeds
 	public Deeds(String title, int loc, int price, int startRent, int costPerHouse, int house1, int house2, int house3,
 			int house4, int hotel, int mortgagePrice) {
 
@@ -41,7 +42,8 @@ public class Deeds {
 		mortgage = mortgagePrice;	
 
 	}
-	
+	 
+	//Railroad Deeds
 	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent, 
 			int mortgagePrice) {
 		
@@ -56,6 +58,8 @@ public class Deeds {
 		
 	}
 	
+	
+	//Utilities
 	public Deeds(String title, int loc, int price, int startRent, int twoRent,
 			int mortgagePrice) {
 		
@@ -70,11 +74,6 @@ public class Deeds {
 	
 
 	public void purchaseHouses() throws IOException {
-
-
-	}
-
-	public int purchaseHouses() throws IOException {
 
 
 		numOfHouses = ConsoleUI.promptForInt("How many houses would you like to purchase?", 0, 4);
@@ -97,12 +96,6 @@ public class Deeds {
 	}
 
 	public boolean amIOwned() {
-
-		if (owned) {
-			return true;
-		} else
-			return false;
-
 		return isTaken;
 
 	}

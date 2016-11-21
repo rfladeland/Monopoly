@@ -1,5 +1,5 @@
 package Monopoly;
 
 public enum gamePieces {
-	HorseRider, Thimble, Cannon, Hat, Dog, Battleship, Car, Iron, Shoe, Wheelbarrow
+	Thimble, Cannon, Hat, Dog, Battleship, Car, Shoe, Wheelbarrow
 }

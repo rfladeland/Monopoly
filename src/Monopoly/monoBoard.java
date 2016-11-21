@@ -19,11 +19,11 @@ public class monoBoard {
 		
 	}
 	
-	public void moveBoard(Piece player,int curSpace, int moveSpaces){
+	public void moveBoard(gamePieces player,int curSpace, int moveSpaces){
 		
 	}
 	
-	public void goToJail(Piece player){
+	public void goToJail(gamePieces player){
 		
 	}
 	

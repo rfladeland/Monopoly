@@ -34,7 +34,7 @@ public class thePlayer {
 		}
 		
 		//moves player to jail picks 'go to jail' card
-		if(card.equals("Go to Jail")){ //card is a placeholder variable to test
+		if(card.equals("Go to Jail")){ //card is a placeholder variable 
 			location = 11;
 			playerInJail = true;
 		}
@@ -42,7 +42,7 @@ public class thePlayer {
 		//gets player out of jail
 		if(playerInJail = true){
 			for(jailTurnCounter = 0; jailTurnCounter < 4; jailTurnCounter++){
-				if(diceRoll1 == diceRoll2){
+				if(diceRoll1 == diceRoll2){ //diceRoll1 and diceRoll2 are placeholder variables
 					playerInJail = false;
 					break;
 				}else if(card.equals("Get out of Jail")){
@@ -59,7 +59,7 @@ public class thePlayer {
 			}
 		}
 		
-		//adds 200 money when they pass go (not sure how to do it so that it won't count it the first play)
+		//adds 200 money when they pass go (not sure how to do it so that it won't count it for the first play)
 		if(location == 2){
 			playerMoney += 200;
 		}

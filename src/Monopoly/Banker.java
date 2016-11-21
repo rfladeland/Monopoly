@@ -63,6 +63,17 @@ public class Banker {
 		//Dark Blue
 		properties.add(new Deeds("Park Place", 38, 350, 35, 200, 175, 500, 1100, 1300, 1700, 175));
 		properties.add(new Deeds("Boardswalk", 40, 400, 50, 200, 200, 600, 1400, 1700, 200, 200));
+		
+		//Railroads
+		properties.add(new Deeds("Reading Railroad", 6, 200, 25, 50, 100, 200, 100));
+		properties.add(new Deeds("Pennsylvania Railroad", 16, 200, 25, 50, 100, 200, 100));
+		properties.add(new Deeds("B. & O. Railroad", 26, 200, 25, 50, 100, 200, 100));
+		properties.add(new Deeds("Short Line", 36, 200, 25, 50, 100, 200, 100));
+
+		//Utilities
+		properties.add(new Deeds("Electric Company", 13, 150, startRent, twoRent, 75));
+		properties.add(new Deeds("Water Works", 13, 150, startRent, twoRent, 75));
+
 	}
 	
 }

@@ -63,6 +63,12 @@ public class thePlayer {
 		if(location == 2){
 			playerMoney += 200;
 		}
+		
+		//resets location number
+		if(location == 41){
+			location = 1;
+		}
+		
 		//just a giant mess with the enums :'D I need help here
 //		for(i = 1; i < numberOfPlayers+1; i++){
 //			String thePlayers[];

@@ -42,19 +42,12 @@ public class Deeds {
 		mortgage = mortgagePrice;
 
 	}
-<<<<<<< HEAD
-	 
-	//Railroad Deeds
-	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent, int mortgagePrice){
-			name = title;
-=======
 
 	// Constructor for railroads
 	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent,
 			int mortgagePrice) {
 
 		name = title;
->>>>>>> 5cde6608a63f16dc56f77315fc5f9b76a75b4575
 		location = loc;
 		purchasePrice = price;
 		rent = startRent;

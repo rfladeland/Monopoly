@@ -71,8 +71,8 @@ public class Banker {
 		properties.add(new Deeds("Short Line", 36, 200, 25, 50, 100, 200, 100));
 
 		//Utilities
-		properties.add(new Deeds("Electric Company", 13, 150, startRent, twoRent, 75));
-		properties.add(new Deeds("Water Works", 13, 150, startRent, twoRent, 75));
+		properties.add(new Deeds("Electric Company", 13, 150, 1, 10, 75));
+		properties.add(new Deeds("Water Works", 13, 150, 1, 10, 75));
 
 	}
 	

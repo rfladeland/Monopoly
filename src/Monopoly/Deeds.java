@@ -42,17 +42,10 @@ public class Deeds {
 		mortgage = mortgagePrice;
 
 	}
-<<<<<<< HEAD
 	 
 	//Railroad Deeds
-	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent, 
-=======
-
-	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent,
->>>>>>> b121bd3d76703eacdc2bbfd12212e4432f5cb893
-			int mortgagePrice) {
-
-		name = title;
+	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent, int mortgagePrice){
+			name = title;
 		location = loc;
 		purchasePrice = price;
 		rent = startRent;
@@ -62,32 +55,21 @@ public class Deeds {
 		mortgage = mortgagePrice;
 
 	}
-<<<<<<< HEAD
 	
 	
 	//Utilities
 	public Deeds(String title, int loc, int price, int startRent, int twoRent,
 			int mortgagePrice) {
-		
-=======
-
-	public Deeds(String title, int loc, int price, int startRent, int twoRent, int mortgagePrice) {
-
->>>>>>> b121bd3d76703eacdc2bbfd12212e4432f5cb893
 		name = title;
 		location = loc;
 		purchasePrice = price;
 		rent = startRent;
 		twoOwnedRent = twoRent;
 		mortgage = mortgagePrice;
-
-<<<<<<< HEAD
-=======
 	}
 
 	public void purchaseHouses() throws IOException {
 
->>>>>>> b121bd3d76703eacdc2bbfd12212e4432f5cb893
 		numOfHouses = ConsoleUI.promptForInt("How many houses would you like to purchase?", 0, 4);
 
 		purchasePrice = houseHotelPurchasePrice * numOfHouses;

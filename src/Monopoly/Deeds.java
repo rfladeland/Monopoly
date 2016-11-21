@@ -25,6 +25,7 @@ public class Deeds {
 	private int mortgage;
 	private boolean isTaken = false;
 
+	// Constructor for regular properties
 	public Deeds(String title, int loc, int price, int startRent, int costPerHouse, int house1, int house2, int house3,
 			int house4, int hotel, int mortgagePrice) {
 
@@ -38,13 +39,14 @@ public class Deeds {
 		house3Rent = house3;
 		house4Rent = house4;
 		hotelRent = hotel;
-		mortgage = mortgagePrice;	
+		mortgage = mortgagePrice;
 
 	}
-	
-	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent, 
+
+	// Constructor for railroads
+	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent,
 			int mortgagePrice) {
-		
+
 		name = title;
 		location = loc;
 		purchasePrice = price;
@@ -53,29 +55,23 @@ public class Deeds {
 		threeOwnedRent = threeRent;
 		fourOwnedRent = fourRent;
 		mortgage = mortgagePrice;
-		
+
 	}
-	
-	public Deeds(String title, int loc, int price, int startRent, int twoRent,
-			int mortgagePrice) {
-		
+
+	// Constructor for utilities
+	public Deeds(String title, int loc, int price, int startRent, int twoRent, int mortgagePrice) {
+
 		name = title;
 		location = loc;
 		purchasePrice = price;
 		rent = startRent;
 		twoOwnedRent = twoRent;
 		mortgage = mortgagePrice;
-		
-	}
-	
 
+	}
+
+	// Method for purchasing houses, may need more work
 	public void purchaseHouses() throws IOException {
-
-
-	}
-
-	public int purchaseHouses() throws IOException {
-
 
 		numOfHouses = ConsoleUI.promptForInt("How many houses would you like to purchase?", 0, 4);
 
@@ -86,7 +82,9 @@ public class Deeds {
 
 	}
 
+	// Method for purchasing hotels, may need more work
 	public void purchaseHotels() throws IOException {
+
 		numOfHotels = ConsoleUI.promptForInt("How many hotels would you like to purchase?", 0, 1);
 
 		purchasePrice = houseHotelPurchasePrice * numOfHotels;
@@ -96,27 +94,25 @@ public class Deeds {
 
 	}
 
+	// Determines if the property is owned or not
 	public boolean amIOwned() {
-
-		if (owned) {
-			return true;
-		} else
-			return false;
-
 		return isTaken;
 
 	}
 
+	// Flips the property from owned to not owned and vice-versa when called
 	public void takenFlip() {
+
 		isTaken = !isTaken;
 	}
 
-
+	// Calculates the rent based on the location of the property in the array
 	public int rent() {
 
 		return rent;
 	}
 
+	// Finds what space on the board the player lands on, not sure if this is needed
 	public int spaceOnBoard() {
 
 		return spaceOnBoard;

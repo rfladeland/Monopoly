@@ -38,13 +38,13 @@ public class Deeds {
 		house3Rent = house3;
 		house4Rent = house4;
 		hotelRent = hotel;
-		mortgage = mortgagePrice;	
+		mortgage = mortgagePrice;
 
 	}
-	
-	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent, 
+
+	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent,
 			int mortgagePrice) {
-		
+
 		name = title;
 		location = loc;
 		purchasePrice = price;
@@ -53,29 +53,21 @@ public class Deeds {
 		threeOwnedRent = threeRent;
 		fourOwnedRent = fourRent;
 		mortgage = mortgagePrice;
-		
+
 	}
-	
-	public Deeds(String title, int loc, int price, int startRent, int twoRent,
-			int mortgagePrice) {
-		
+
+	public Deeds(String title, int loc, int price, int startRent, int twoRent, int mortgagePrice) {
+
 		name = title;
 		location = loc;
 		purchasePrice = price;
 		rent = startRent;
 		twoOwnedRent = twoRent;
 		mortgage = mortgagePrice;
-		
+
 	}
-	
 
 	public void purchaseHouses() throws IOException {
-
-
-	}
-
-	public int purchaseHouses() throws IOException {
-
 
 		numOfHouses = ConsoleUI.promptForInt("How many houses would you like to purchase?", 0, 4);
 
@@ -110,7 +102,6 @@ public class Deeds {
 	public void takenFlip() {
 		isTaken = !isTaken;
 	}
-
 
 	public int rent() {
 

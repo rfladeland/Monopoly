@@ -9,8 +9,6 @@ public class monoMenu {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	// menu to start Monopoly
 	public void menu() throws IOException {
-		final int MAX_PLAYERS = 8;
-		final int MIN_PLAYERS = 2;
 		String[] options = { "Rules", "Start", "Credits" };
 		boolean quit = false;
 		while (!quit) {
@@ -18,22 +16,8 @@ public class monoMenu {
 			if (menu == 1) {
 				theRules();
 			} else if (menu == 2) {
-				// input players amount
-				int players = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
-				//ask each players entered what game piece they want
-				System.out.println("There are " + players + " players for this game.");
-				
-				//need to think on how I'm going to go about this vvv
-				for(int i = 1; i < players+1; i++){
-					gamePieces playerPiece = null;
-					System.out.println("Player " + i + ", What game piece do you want to play?");
-					System.out.println("Tokens you can play as: Horse Rider, Thimble, Cannon, Hat, Dog, "
-							+ "Battleship, Car, Iron, Shoe, Wheelbarrow");
-					String pieceChoice = in.readLine();
-					System.out.println("Player " + i + " chose " + playerPiece + ".");
-				}
-
-				// if players accepted ask what piece they want
+				thePlayer tP = new thePlayer();
+				tP.pickingGamePiece();
 			} else if (menu == 3) {
 				System.out.println("Christain Griffus");
 				System.out.println("Jeremy Currie");
@@ -347,7 +331,7 @@ public class monoMenu {
 				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
-			} else {
+			} else{
 				// Back to Menu
 				ruleQuit = true;
 			}

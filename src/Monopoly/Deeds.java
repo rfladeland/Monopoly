@@ -5,7 +5,7 @@ import java.io.IOException;
 import ConsoleUI.ConsoleUI;
 
 public class Deeds {
-
+	private String color = "";
 	private String name = "";
 	private int location;
 	private int numOfHouses;
@@ -26,10 +26,11 @@ public class Deeds {
 	private boolean isTaken = false;
 
 	// Constructor for regular properties
-	public Deeds(String title, int loc, int price, int startRent, int costPerHouse, int house1, int house2, int house3,
+	public Deeds(String title, String deedColor, int loc, int price, int startRent, int costPerHouse, int house1, int house2, int house3,
 			int house4, int hotel, int mortgagePrice) {
 
 		name = title;
+		color = deedColor;
 		location = loc;
 		purchasePrice = price;
 		rent = startRent;
@@ -44,10 +45,11 @@ public class Deeds {
 	}
 
 	// Constructor for railroads
-	public Deeds(String title, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent,
+	public Deeds(String title, String deedColor, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent,
 			int mortgagePrice) {
 
 		name = title;
+		color = deedColor;
 		location = loc;
 		purchasePrice = price;
 		rent = startRent;
@@ -59,9 +61,10 @@ public class Deeds {
 	}
 
 	// Constructor for utilities
-	public Deeds(String title, int loc, int price, int startRent, int twoRent, int mortgagePrice) {
+	public Deeds(String title,String deedColor, int loc, int price, int startRent, int twoRent, int mortgagePrice) {
 
 		name = title;
+		color = deedColor;
 		location = loc;
 		purchasePrice = price;
 		rent = startRent;
@@ -107,8 +110,7 @@ public class Deeds {
 	}
 
 	// Calculates the rent based on the location of the property in the array
-	public int rent() {
-
+	public int getRent() {
 		return rent;
 	}
 
@@ -117,5 +119,20 @@ public class Deeds {
 
 		return spaceOnBoard;
 	}
-
+	
+	public String getName(){
+		return name;
+	}
+	
+	public int getLocation(){
+		return location;
+	}
+	
+	public String getColor(){
+		return color;
+	}
+	
+	public int getMortgage(){
+		return mortgage;
+	}
 }

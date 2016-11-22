@@ -9,6 +9,8 @@ public class monoMenu {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	// menu to start Monopoly
 	public void menu() throws IOException {
+		final int MAX_PLAYERS = 8;
+		final int MIN_PLAYERS = 2;
 		String[] options = { "Rules", "Start", "Credits" };
 		boolean quit = false;
 		while (!quit) {
@@ -16,8 +18,10 @@ public class monoMenu {
 			if (menu == 1) {
 				theRules();
 			} else if (menu == 2) {
-				thePlayer tP = new thePlayer();
-				tP.pickingGamePiece();
+				int inputNumberOfPlayers = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
+				System.out.println("There are " + inputNumberOfPlayers + " players for this game.");
+				monopolyRunner mR = new monopolyRunner();
+				mR.pickingGamePiece(inputNumberOfPlayers);
 			} else if (menu == 3) {
 				System.out.println("Christain Griffus");
 				System.out.println("Jeremy Currie");

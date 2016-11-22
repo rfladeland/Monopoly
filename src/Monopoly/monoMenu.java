@@ -3,11 +3,13 @@ package Monopoly;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 import ConsoleUI.ConsoleUI;
 public class monoMenu {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	// menu to start Monopoly
+	private static monopolyRunner mR = new monopolyRunner();
 	public void menu() throws IOException {
 		final int MAX_PLAYERS = 8;
 		final int MIN_PLAYERS = 2;
@@ -20,7 +22,6 @@ public class monoMenu {
 			} else if (menu == 2) {
 				int inputNumberOfPlayers = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
 				System.out.println("There are " + inputNumberOfPlayers + " players for this game.");
-				monopolyRunner mR = new monopolyRunner();
 				mR.pickingGamePiece(inputNumberOfPlayers);
 			} else if (menu == 3) {
 				System.out.println("Christain Griffus");

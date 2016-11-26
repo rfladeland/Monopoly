@@ -14,6 +14,7 @@ public class thePlayer {
 	private ArrayList<cards> ownedCards = new ArrayList<cards>();
 	
 	private gamePieces piece;
+	private boolean hasRolled = false;
 	private boolean playerInJail = false;
 	private int jailTurnCounter = 0;
 	private int money;
@@ -62,8 +63,21 @@ public class thePlayer {
 	public void move(int numSpaces){
 		location += numSpaces;
 		if(location > 40){
+			location -= 40;
 			System.out.println("You have passed go. You collected $200");
 			money += 200;
 		}
+	}
+	
+	public void flipRoll(){
+		hasRolled = !hasRolled;
+	}
+	
+	public int getLocation(){
+		return location;
+	}
+	
+	public boolean getRolled(){
+		return hasRolled;
 	}
 }

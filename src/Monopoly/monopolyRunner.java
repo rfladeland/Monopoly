@@ -9,24 +9,24 @@ import ConsoleUI.ConsoleUI;
 
 public class monopolyRunner {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	private static int numPlayers;
 	private static monoMenu mm = new monoMenu();
 	private static monoBoard mb = new monoBoard();
 	private static thePlayer[] players;
+	private static String[] playerMenu = { "Roll","Buy", "End Turn" };
 	private static String[] listOfPieces = { "Battleship", "Cannon", "Car", "Dog", "Hat", "Shoe", "Thimble",
 			"Wheelbarrow" };
 
-	
-	
 	public static void main(String[] args) throws IOException {
-		
+
 		final int MAX_PLAYERS = 8;
 		final int MIN_PLAYERS = 2;
 		mm.menu();
 		System.out.println("Monopoly is booted up.");
-		int inputNumberOfPlayers = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
-		System.out.println("There are " + inputNumberOfPlayers + " players for this game.");
-		players = new thePlayer[inputNumberOfPlayers];
-		for (int i = 0; i < inputNumberOfPlayers; i++) {
+		int numPlayers = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
+		System.out.println("There are " + numPlayers + " players for this game.");
+		players = new thePlayer[numPlayers];
+		for (int i = 0; i < numPlayers; i++) {
 			players[i] = new thePlayer();
 			System.out.println();
 			System.out.println();
@@ -42,9 +42,49 @@ public class monopolyRunner {
 		System.out.println();
 		System.out.println();
 		System.out.println();
-		for (thePlayer player : players) {
-			System.out.println(player.getPiece());
-		}
+		int turnTracker = 0;
+		int choice = -1;
+		// loop for the entire game
+		do {
+			//mortgage//
+			//sell//
+			//Auction//
+			//Jail//
+			//trade//
+			//Doubles//
+			//Buy houses//
+			
+			// loop for the individual turns
+			do {
+				turnTracker %= numPlayers;
+				System.out.println(players[turnTracker].getPiece() + " it is your turn. What would you like to do?");
+				choice = ConsoleUI.promptForMenuSelection(playerMenu, false);
+				switch (choice) {
+				// rolls the dice
+				case 1:
+					if (players[turnTracker].getRolled()) {
+						System.out.println("Sorry, but you cannot roll again this turn.");
+					}else{
+						roll(turnTracker);
+						players[turnTracker].flipRoll();
+						System.out.println("You are now on " + mb.getSpace(players[turnTracker].getLocation()));
+					}
+				// buys a property
+				case 2:
+					System.out.println("This space costs " + 1);
+				// ends the turn
+				case 3:
+					if(!players[turnTracker].getRolled()){
+						System.out.println("Sorry, but you have to roll first.");
+						choice = -1;
+					}else{
+						break;
+						}
+				}
+			} while (choice != 3);
+			players[turnTracker].flipRoll();
+			turnTracker ++;
+		} while (!isOver());
 
 	}
 
@@ -56,86 +96,18 @@ public class monopolyRunner {
 
 	}
 
-	// // prints player stats (a general code for one player, doesn't differ
-	// // which player has what stats)
-	// String[] playerStartMenu = { "Roll Dice", "View Stats" };
-	// System.out.println("It is " + playerPiece + "'s turn. What do you want to
-	// do?");
-	// int startMenu = ConsoleUI.promptForMenuSelection(playerStartMenu, true);
-	// if (startMenu == 1) {
-	// // rolls the dice
-	// roll();
-	// } else if (startMenu == 2) {
-	// // shows player their stats of the game so far
-	// System.out.println("You have: " + playerMoney);
-	// System.out.println("You owe: " + playerMoneyOwed);
-	// } else {
-	// System.out.println(playerPiece.toString() + " has quit. All your
-	// properties will be auctioned.");
-	// }
-	//
-	// // // moves player to jail if landed on 'go to jail' spot
-	// // if (location == 31) {
-	// // System.out.println("Looks like you're going to jail.");
-	// // playerInJail = true;
-	// // location = 11;
-	// // }
-	// //
-	// // // moves player to jail picks 'go to jail' card
-	// // if (card.equals("Go to Jail")) { // card is a placeholder variable
-	// // for
-	// // location = 11;
-	// // playerInJail = true;
-	// // }
-	// //
-	// // // gets player out of jail
-	// // if (playerInJail = true) {
-	// // for (jailTurnCounter = 0; jailTurnCounter < 4; jailTurnCounter++) {
-	// // if (diceRoll1 == diceRoll2) { // diceRoll1 and diceRoll2 are
-	// // // placeholder variables
-	// // playerInJail = false;
-	// // break;
-	// // } else if (card.equals("Get out of Jail")) {
-	// // playerInJail = false;
-	// // break;
-	// // } else {
-	// // playerInJail = true;
-	// // }
-	// // }
-	// // if (jailTurnCounter == 3) {
-	// // playerMoney -= 50;
-	// // playerInJail = false;
-	// // break;
-	// // }
-	// // }
-	//
-	// // resets location number
-	// if (location >= 41) {
-	// location -= 40;
-	// }
-	// }
-
-	public static void removePiece(int removedSpace) {
-		String[] temp = new String[listOfPieces.length - 1];
-		int j = 0;
-		for (int i = 0; i < listOfPieces.length; i++) {
-			if (i == removedSpace) {
-			} else {
-				temp[j] = listOfPieces[i];
-				j++;
-			}
-		}
-		listOfPieces = temp;
-	}
-
 	// pretty sure this works
-	public void roll(int player) {
+	public static void roll(int player) {
 		Random genRan = new Random();
 		int rollingDice1 = genRan.nextInt(6) + 1;
 		int rollingDice2 = genRan.nextInt(6) + 1;
 		int sumOfRolls = rollingDice1 + rollingDice2;
 		System.out.println("You rolled " + rollingDice1 + " and " + rollingDice2 + ". Move " + sumOfRolls + " spaces.");
 		players[player].move(sumOfRolls);
+	}
+
+	public static boolean isOver() {
+		return false;
 	}
 
 	public void playAgain() throws IOException {
@@ -158,4 +130,16 @@ public class monopolyRunner {
 		} while (!valid);
 	}
 
+	public static void removePiece(int removedSpace) {
+		String[] temp = new String[listOfPieces.length - 1];
+		int j = 0;
+		for (int i = 0; i < listOfPieces.length; i++) {
+			if (i == removedSpace) {
+			} else {
+				temp[j] = listOfPieces[i];
+				j++;
+			}
+		}
+		listOfPieces = temp;
+	}
 }

@@ -12,8 +12,8 @@ public class Deeds {
 	private int numOfHotels;
 	private int purchasePrice;
 	private int houseHotelPurchasePrice;
+	private int curRent;
 	private int rent;
-	private int spaceOnBoard;
 	private int house1Rent;
 	private int house2Rent;
 	private int house3Rent;
@@ -33,6 +33,7 @@ public class Deeds {
 		color = deedColor;
 		location = loc;
 		purchasePrice = price;
+		curRent = startRent;
 		rent = startRent;
 		houseHotelPurchasePrice = costPerHouse;
 		house1Rent = house1;
@@ -57,7 +58,7 @@ public class Deeds {
 		threeOwnedRent = threeRent;
 		fourOwnedRent = fourRent;
 		mortgage = mortgagePrice;
-
+		curRent = startRent;
 	}
 
 	// Constructor for utilities
@@ -67,6 +68,7 @@ public class Deeds {
 		color = deedColor;
 		location = loc;
 		purchasePrice = price;
+		curRent = startRent;
 		rent = startRent;
 		twoOwnedRent = twoRent;
 		mortgage = mortgagePrice;
@@ -87,16 +89,36 @@ public class Deeds {
 
 	// Method for purchasing hotels, may need more work
 	public void purchaseHotels() throws IOException {
-
 		numOfHotels = ConsoleUI.promptForInt("How many hotels would you like to purchase?", 0, 1);
-
+		if(numOfHotels == 1){
 		purchasePrice = houseHotelPurchasePrice * numOfHotels;
-
-		System.out.println(
-				"You have purchased " + numOfHotels + " hotels, and the total cost was " + purchasePrice + " dollars.");
-
+		System.out.println("You have purchased one hotel for " + purchasePrice + " dollars.");
+		}else{
+			System.out.println("You didn't buy a hotel.");
+		}
 	}
-
+	
+	public void setRent(int house, int hotel){
+		if(hotel == 0){
+		switch(house){
+		case 1:
+			curRent = house1Rent;
+			break;
+		case 2:
+			curRent = house2Rent;
+			break;
+		case 3:
+			curRent = house3Rent;
+			break;
+		case 4:
+			curRent = house4Rent;
+			break;
+		}
+		}else{
+			curRent = hotelRent;
+		}
+	}
+	
 	// Determines if the property is owned or not
 	public boolean amIOwned() {
 		return isTaken;
@@ -109,23 +131,23 @@ public class Deeds {
 		isTaken = !isTaken;
 	}
 
-	// Calculates the rent based on the location of the property in the array
+	// Returns what the rent is
 	public int getRent() {
 		return rent;
 	}
 
-	// Finds what space on the board the player lands on, not sure if this is needed
-	public int spaceOnBoard() {
-
-		return spaceOnBoard;
-	}
 	
 	public String getName(){
 		return name;
 	}
 	
+	// Finds what space on the board the player lands on
 	public int getLocation(){
 		return location;
+	}
+	
+	public int getCurRent(){
+		return curRent;
 	}
 	
 	public String getColor(){

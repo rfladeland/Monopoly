@@ -3,16 +3,13 @@ package Monopoly;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Random;
-
 import ConsoleUI.ConsoleUI;
+
 public class monoMenu {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-	// menu to start Monopoly
-	private static monopolyRunner mR = new monopolyRunner();
+
+	// menu for start of monopoly
 	public void menu() throws IOException {
-		final int MAX_PLAYERS = 8;
-		final int MIN_PLAYERS = 2;
 		String[] options = { "Rules", "Start", "Credits" };
 		boolean quit = false;
 		while (!quit) {
@@ -20,9 +17,7 @@ public class monoMenu {
 			if (menu == 1) {
 				theRules();
 			} else if (menu == 2) {
-				int inputNumberOfPlayers = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
-				System.out.println("There are " + inputNumberOfPlayers + " players for this game.");
-				mR.pickingGamePiece(inputNumberOfPlayers);
+				return;
 			} else if (menu == 3) {
 				System.out.println("Christain Griffus");
 				System.out.println("Jeremy Currie");
@@ -35,16 +30,17 @@ public class monoMenu {
 				System.out.println("You quit Monopoly");
 				quit = true;
 			}
-		}	
+		}
 	}
 
 	public void theRules() throws IOException {
 		System.out.println("What do you need to know?");
 		boolean ruleQuit = false;
-		while(!ruleQuit){
+		while (!ruleQuit) {
 			String[] rules = { "Object", "Preparation", "Banker", "The Bank", "The Play", "'Go'", "Buying Properties",
-				"Paying Rent", "'Chance' and 'Community Chest' Cards", "Income Tax", "Jail", "'Free Parking'", "Houses",
-				"Hotels", "Selling Properties", "Mortgages", "Bankruptcy", "Miscellaneous", "Back to Menu" };
+					"Paying Rent", "'Chance' and 'Community Chest' Cards", "Income Tax", "Jail", "'Free Parking'",
+					"Houses", "Hotels", "Selling Properties", "Mortgages", "Bankruptcy", "Miscellaneous",
+					"Back to Menu" };
 			int ruleSelect = ConsoleUI.promptForMenuSelection(rules, ruleQuit);
 			if (ruleSelect == 1) {
 				// explains object
@@ -58,7 +54,7 @@ public class monoMenu {
 				// explains preparation
 				System.out.println(" Place the board on a table and put the Chance "
 						+ "and Community Chest cards facedown on their allotted " + "spaces on the\n board. "
-								+ "Each player chooses one token to represent him/her while traveling around " + "the board.");
+						+ "Each player chooses one token to represent him/her while traveling around " + "the board.");
 				System.out.println("");
 				System.out.println(" Each player is given $1,500");
 				System.out.println("");
@@ -147,8 +143,9 @@ public class monoMenu {
 				System.out.println(" When you land on property owned by another player, the owner collects rent "
 						+ "from you in accordance with the list\n printed on its Title Deed card.");
 				System.out.println("");
-				System.out.println(" If the property is mortgaged, no rent can be collected.\n When a property is mortgaged, "
-						+ "its Title Deed card is placed face-down in front of the owner.");
+				System.out.println(
+						" If the property is mortgaged, no rent can be collected.\n When a property is mortgaged, "
+								+ "its Title Deed card is placed face-down in front of the owner.");
 				System.out.println("");
 				System.out.println(" It is an advantage to hold all the Title Deed cards in a color-group (e.g., "
 						+ "Boardwalk and Park Place; or Connecticut,\n Vermont and Oriental Avenue) because the owner may then charge "
@@ -194,18 +191,20 @@ public class monoMenu {
 						+ "Jail'; \n (2) you draw a card marked 'Go to Jail'; or \n (3) you thow doubles three times in succession");
 				System.out.println("");
 				System.out.println(" When you are sent to Jail you cannot collect your $200 salary in that move "
-						+ "since, regardless of where your token is on\n the board, you must move it directly into " + "Jail. Your turn ends when you are sent to Jail.");
+						+ "since, regardless of where your token is on\n the board, you must move it directly into "
+						+ "Jail. Your turn ends when you are sent to Jail.");
 				System.out.println("");
 				System.out.println(" If you are not 'sent' to Jail but in the ordinary course of play land on that "
 						+ "space, you are 'Just Visiting',\n you incur no penalty, and you move ahead in the usual "
 						+ "manner on your next turn.");
 				System.out.println("");
-				System.out.println(" You get out of Jail by... \n (1) throwing doubles on any of your next three turns; "
-						+ "if you succeed in doing this you immediately move forward the\n     number of spaces shown by your "
-						+ "doubles throw; even though you had thrown doubles, you do not take another turn; \n (2) using "
-						+ "the 'Get Out of Jail Free' card if you have it; \n (3) purchasing the 'Get Out of Jail Free' card "
-						+ "from another player and playing it; \n (4) paying a fine of $50 before you roll the dice on either "
-						+ "of your next two turns.");
+				System.out
+						.println(" You get out of Jail by... \n (1) throwing doubles on any of your next three turns; "
+								+ "if you succeed in doing this you immediately move forward the\n     number of spaces shown by your "
+								+ "doubles throw; even though you had thrown doubles, you do not take another turn; \n (2) using "
+								+ "the 'Get Out of Jail Free' card if you have it; \n (3) purchasing the 'Get Out of Jail Free' card "
+								+ "from another player and playing it; \n (4) paying a fine of $50 before you roll the dice on either "
+								+ "of your next two turns.");
 				System.out.println("");
 				System.out.println(" If you do not throw doubles by your third turn, you must pay the $50 fine. "
 						+ "\n You then get out of Jail and immediately move forward the number of spaces shown by your "
@@ -219,8 +218,9 @@ public class monoMenu {
 				ruleQuit = false;
 			} else if (ruleSelect == 12) {
 				// explains free parking
-				System.out.println(" A player landing on this place does not receive any money, property or reward of any "
-						+ "kind.\n This is just a 'free' resting place.");
+				System.out.println(
+						" A player landing on this place does not receive any money, property or reward of any "
+								+ "kind.\n This is just a 'free' resting place.");
 				System.out.println("");
 				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
@@ -336,7 +336,7 @@ public class monoMenu {
 				System.out.println(" Press enter to go back to rule menu.");
 				in.readLine();
 				ruleQuit = false;
-			} else{
+			} else {
 				// Back to Menu
 				ruleQuit = true;
 			}

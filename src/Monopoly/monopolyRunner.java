@@ -13,7 +13,7 @@ public class monopolyRunner {
 	private static monoMenu mm = new monoMenu();
 	private static monoBoard mb = new monoBoard();
 	private static thePlayer[] players;
-	private static String[] playerMenu = { "Roll","Buy", "End Turn" };
+	private static String[] playerMenu = { "Roll","Buy houses/ hotels", "End Turn", "Quit", "Mortgage / Unmortgage" };
 	private static String[] listOfPieces = { "Battleship", "Cannon", "Car", "Dog", "Hat", "Shoe", "Thimble",
 			"Wheelbarrow" };
 
@@ -46,13 +46,8 @@ public class monopolyRunner {
 		int choice = -1;
 		// loop for the entire game
 		do {
-			//mortgage//
-			//sell//
-			//Auction//
 			//Jail//
-			//trade//
 			//Doubles//
-			//Buy houses//
 			
 			// loop for the individual turns
 			do {
@@ -60,6 +55,7 @@ public class monopolyRunner {
 				System.out.println(players[turnTracker].getPiece() + " it is your turn. What would you like to do?");
 				choice = ConsoleUI.promptForMenuSelection(playerMenu, false);
 				switch (choice) {
+				
 				// rolls the dice
 				case 1:
 					if (players[turnTracker].getRolled()) {
@@ -69,9 +65,11 @@ public class monopolyRunner {
 						players[turnTracker].flipRoll();
 						System.out.println("You are now on " + mb.getSpace(players[turnTracker].getLocation()));
 					}
-				// buys a property
+					
+				// buys houses / hotels 
 				case 2:
 					System.out.println("This space costs " + 1);
+					
 				// ends the turn
 				case 3:
 					if(!players[turnTracker].getRolled()){
@@ -80,6 +78,38 @@ public class monopolyRunner {
 					}else{
 						break;
 						}
+					
+					//"Quit game"
+					// auctions off everything 
+					// removes player from game
+				case 4:
+					
+					//mortgage / unmortgage
+				case 5:
+					players[turnTracker].mortgageMenu();
+					
+					
+					//trade
+				case 6:
+		//			trade(players[turnTracker]);
+					
+					
+					//sell houses and hotels
+				case 7:
+		//			players[turnTracker].sell();
+				
+					
+					//show player money as well
+					// as owned properties
+					// goes into a different method with a different menu
+				case 8:
+					
+					
+					//Auction off specific deeds that you own
+					//No buildings are allowed
+				case 9:
+				
+				
 				}
 			} while (choice != 3);
 			players[turnTracker].flipRoll();
@@ -107,7 +137,7 @@ public class monopolyRunner {
 	}
 
 	public static boolean isOver() {
-		return false;
+		return(players.length > 1);
 	}
 
 	public void playAgain() throws IOException {

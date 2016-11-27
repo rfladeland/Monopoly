@@ -23,11 +23,12 @@ public class Deeds {
 	private int threeOwnedRent;
 	private int fourOwnedRent;
 	private int mortgage;
+	private boolean isMortgaged = false;
 	private boolean isTaken = false;
 
 	// Constructor for regular properties
-	public Deeds(String title, String deedColor, int loc, int price, int startRent, int costPerHouse, int house1, int house2, int house3,
-			int house4, int hotel, int mortgagePrice) {
+	public Deeds(String title, String deedColor, int loc, int price, int startRent, int costPerHouse, int house1,
+			int house2, int house3, int house4, int hotel, int mortgagePrice) {
 
 		name = title;
 		color = deedColor;
@@ -46,8 +47,8 @@ public class Deeds {
 	}
 
 	// Constructor for railroads
-	public Deeds(String title, String deedColor, int loc, int price, int startRent, int twoRent, int threeRent, int fourRent,
-			int mortgagePrice) {
+	public Deeds(String title, String deedColor, int loc, int price, int startRent, int twoRent, int threeRent,
+			int fourRent, int mortgagePrice) {
 
 		name = title;
 		color = deedColor;
@@ -62,7 +63,7 @@ public class Deeds {
 	}
 
 	// Constructor for utilities
-	public Deeds(String title,String deedColor, int loc, int price, int startRent, int twoRent, int mortgagePrice) {
+	public Deeds(String title, String deedColor, int loc, int price, int startRent, int twoRent, int mortgagePrice) {
 
 		name = title;
 		color = deedColor;
@@ -90,35 +91,35 @@ public class Deeds {
 	// Method for purchasing hotels, may need more work
 	public void purchaseHotels() throws IOException {
 		numOfHotels = ConsoleUI.promptForInt("How many hotels would you like to purchase?", 0, 1);
-		if(numOfHotels == 1){
-		purchasePrice = houseHotelPurchasePrice * numOfHotels;
-		System.out.println("You have purchased one hotel for " + purchasePrice + " dollars.");
-		}else{
+		if (numOfHotels == 1) {
+			purchasePrice = houseHotelPurchasePrice * numOfHotels;
+			System.out.println("You have purchased one hotel for " + purchasePrice + " dollars.");
+		} else {
 			System.out.println("You didn't buy a hotel.");
 		}
 	}
-	
-	public void setRent(int house, int hotel){
-		if(hotel == 0){
-		switch(house){
-		case 1:
-			curRent = house1Rent;
-			break;
-		case 2:
-			curRent = house2Rent;
-			break;
-		case 3:
-			curRent = house3Rent;
-			break;
-		case 4:
-			curRent = house4Rent;
-			break;
-		}
-		}else{
+
+	public void setRent(int house, int hotel) {
+		if (hotel == 0) {
+			switch (house) {
+			case 1:
+				curRent = house1Rent;
+				break;
+			case 2:
+				curRent = house2Rent;
+				break;
+			case 3:
+				curRent = house3Rent;
+				break;
+			case 4:
+				curRent = house4Rent;
+				break;
+			}
+		} else {
 			curRent = hotelRent;
 		}
 	}
-	
+
 	// Determines if the property is owned or not
 	public boolean amIOwned() {
 		return isTaken;
@@ -131,30 +132,33 @@ public class Deeds {
 		isTaken = !isTaken;
 	}
 
-	// Returns what the rent is
-	public int getRent() {
-		return rent;
-	}
-
-	
-	public String getName(){
+	public String getName() {
 		return name;
 	}
-	
+
 	// Finds what space on the board the player lands on
-	public int getLocation(){
+	public int getLocation() {
 		return location;
 	}
-	
-	public int getCurRent(){
+
+	// gets rent
+	public int getCurRent() {
 		return curRent;
 	}
-	
-	public String getColor(){
+
+	public String getColor() {
 		return color;
 	}
-	
-	public int getMortgage(){
+
+	public int getMortgage() {
 		return mortgage;
+	}
+
+	public void unMortgage() {
+		isMortgaged = false;
+	}
+
+	public void mortgage() {
+		isMortgaged = true;
 	}
 }

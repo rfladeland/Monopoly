@@ -10,10 +10,12 @@ import ConsoleUI.ConsoleUI;
 public class monopolyRunner {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	private static int numPlayers;
+	private static ArrayList<String> notBuyableSpaces = new ArrayList<String>();
 	private static monoMenu mm = new monoMenu();
 	private static monoBoard mb = new monoBoard();
+	private static Banker bank = new Banker();
 	private static thePlayer[] players;
-	private static String[] playerMenu = { "Roll","Buy houses/ hotels", "End Turn", "Quit", "Mortgage / Unmortgage" };
+	private static String[] playerMenu = { "Roll", "Buy houses/ hotels", "End Turn", "Quit", "Mortgage / Unmortgage" };
 	private static String[] listOfPieces = { "Battleship", "Cannon", "Car", "Dog", "Hat", "Shoe", "Thimble",
 			"Wheelbarrow" };
 
@@ -22,6 +24,7 @@ public class monopolyRunner {
 		final int MAX_PLAYERS = 8;
 		final int MIN_PLAYERS = 2;
 		mm.menu();
+		addNotBuyable();
 		System.out.println("Monopoly is booted up.");
 		int numPlayers = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
 		System.out.println("There are " + numPlayers + " players for this game.");
@@ -46,76 +49,85 @@ public class monopolyRunner {
 		int choice = -1;
 		// loop for the entire game
 		do {
-			//Jail//
-			//Doubles//
-			
+			// Jail//
+			// Doubles//
+
 			// loop for the individual turns
 			do {
 				turnTracker %= numPlayers;
 				System.out.println(players[turnTracker].getPiece() + " it is your turn. What would you like to do?");
 				choice = ConsoleUI.promptForMenuSelection(playerMenu, false);
 				switch (choice) {
-				
+
 				// rolls the dice
 				case 1:
 					if (players[turnTracker].getRolled()) {
 						System.out.println("Sorry, but you cannot roll again this turn.");
-					}else{
+					} else {
 						roll(turnTracker);
 						players[turnTracker].flipRoll();
-						System.out.println("You are now on " + mb.getSpace(players[turnTracker].getLocation()));
+						System.out.println("You are now on " + mb.getSpace(players[turnTracker].getLocation() - 1));
+						if (!(notBuyableSpaces.contains(mb.getSpace(players[turnTracker].getLocation() - 1)))
+								&& players[turnTracker].getMoney() >= bank
+										.sellProperty(players[turnTracker].getLocation()).getCurRent()) {
+							if (ConsoleUI.promptForBool("Would you like to buy this property?(Y/N)", "Y", "N")) {
+								players[turnTracker].buyPiece(bank.sellProperty(players[turnTracker].getLocation()));
+								bank.removePiece(players[turnTracker].getLocation());
+							} else {
+								auction(bank.sellProperty(players[turnTracker].getLocation()));
+							}
+						}
 					}
-					
-				// buys houses / hotels 
+
+					// buys houses / hotels
 				case 2:
 					System.out.println("This space costs " + 1);
-					
-				// ends the turn
+
+					// ends the turn
 				case 3:
-					if(!players[turnTracker].getRolled()){
+					if (!players[turnTracker].getRolled()) {
 						System.out.println("Sorry, but you have to roll first.");
 						choice = -1;
-					}else{
+					} else {
 						break;
-						}
-					
-					//"Quit game"
-					// auctions off everything 
+					}
+
+					// "Quit game"
+					// auctions off everything
 					// removes player from game
 				case 4:
-					
-					//mortgage / unmortgage
+
+					// mortgage / unmortgage
 				case 5:
 					players[turnTracker].mortgageMenu();
-					
-					
-					//trade
+
+					// trade
 				case 6:
-		//			trade(players[turnTracker]);
-					
-					
-					//sell houses and hotels
+					// trade(players[turnTracker]);
+
+					// sell houses and hotels
 				case 7:
-		//			players[turnTracker].sell();
-				
-					
-					//show player money as well
+					// players[turnTracker].sell();
+
+					// show player money as well
 					// as owned properties
 					// goes into a different method with a different menu
 				case 8:
-					
-					
-					//Auction off specific deeds that you own
-					//No buildings are allowed
+
+					// Auction off specific deeds that you own
+					// No buildings are allowed
 				case 9:
-				
-				
+
 				}
 			} while (choice != 3);
 			players[turnTracker].flipRoll();
-			turnTracker ++;
+			turnTracker++;
 		} while (!isOver());
 
+	}
+
+	private static void auction(Deeds sellProperty) {
+		
 	}
 
 	public static int pickingGamePiece() throws IOException {
@@ -137,7 +149,7 @@ public class monopolyRunner {
 	}
 
 	public static boolean isOver() {
-		return(players.length > 1);
+		return (players.length > 1);
 	}
 
 	public void playAgain() throws IOException {
@@ -171,5 +183,20 @@ public class monopolyRunner {
 			}
 		}
 		listOfPieces = temp;
+	}
+
+	public static void addNotBuyable() {
+		notBuyableSpaces.add("1");
+		notBuyableSpaces.add("3");
+		notBuyableSpaces.add("5");
+		notBuyableSpaces.add("8");
+		notBuyableSpaces.add("11");
+		notBuyableSpaces.add("18");
+		notBuyableSpaces.add("21");
+		notBuyableSpaces.add("23");
+		notBuyableSpaces.add("31");
+		notBuyableSpaces.add("34");
+		notBuyableSpaces.add("37");
+		notBuyableSpaces.add("39");
 	}
 }

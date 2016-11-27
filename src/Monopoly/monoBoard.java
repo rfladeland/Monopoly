@@ -17,6 +17,7 @@ public class monoBoard {
 //	[31][30][29][28][27][26][25][24][23][22][21]
 //	go to				  					free
 //	jail				  					parking
+	
 	public monoBoard(){
 		board.add("Go");
 		board.add("Mediteranean Avenue");

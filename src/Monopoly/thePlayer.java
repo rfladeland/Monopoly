@@ -24,7 +24,8 @@ public class thePlayer {
 		money = 1500;
 		location = 1;
 	}
-
+	
+	
 	// Thimble, Cannon, Hat, Dog, Battleship, Car, Shoe, Wheelbarrow
 	public void setPiece(String playerPiece) {
 		switch (playerPiece) {
@@ -108,5 +109,15 @@ public class thePlayer {
 		}else{
 			System.out.println("You don't have anything to mortgage.");
 		}
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+
+	public void buyPiece(Deeds property) {
+		ownedProperties.add(property);
+		money -= property.getCurRent();
 	}
 }

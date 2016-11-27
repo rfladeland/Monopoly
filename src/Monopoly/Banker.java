@@ -76,4 +76,20 @@ public class Banker {
 
 	}
 	
+	public Deeds sellProperty(int location){
+		for(int i =0; i<properties.size(); i++){
+			if(properties.get(i).getLocation() == location){
+			return properties.get(i);	
+			}
+		}
+		return null;
+	}
+
+	public void removePiece(int location) {
+		for(int i =0; i<properties.size(); i++){
+			if(properties.get(i).getLocation() == location){
+			properties.remove(i);	
+			}
+		}
+	}
 }

@@ -28,7 +28,7 @@ public class Deeds {
 
 	// Constructor for regular properties
 	public Deeds(String title, String deedColor, int loc, int price, int startRent, int costPerHouse, int house1,
-			int house2, int house3, int house4, int hotel, int mortgagePrice) {
+			int house2, int house3, int house4, int hotel, int mortgagePrice, boolean owned) {
 
 		name = title;
 		color = deedColor;
@@ -43,12 +43,13 @@ public class Deeds {
 		house4Rent = house4;
 		hotelRent = hotel;
 		mortgage = mortgagePrice;
+		isTaken = owned;
 
 	}
 
 	// Constructor for railroads
 	public Deeds(String title, String deedColor, int loc, int price, int startRent, int twoRent, int threeRent,
-			int fourRent, int mortgagePrice) {
+			int fourRent, int mortgagePrice, boolean owned) {
 
 		name = title;
 		color = deedColor;
@@ -60,10 +61,11 @@ public class Deeds {
 		fourOwnedRent = fourRent;
 		mortgage = mortgagePrice;
 		curRent = startRent;
+		isTaken = owned;
 	}
 
 	// Constructor for utilities
-	public Deeds(String title, String deedColor, int loc, int price, int startRent, int twoRent, int mortgagePrice) {
+	public Deeds(String title, String deedColor, int loc, int price, int startRent, int twoRent, int mortgagePrice, boolean owned) {
 
 		name = title;
 		color = deedColor;
@@ -73,7 +75,7 @@ public class Deeds {
 		rent = startRent;
 		twoOwnedRent = twoRent;
 		mortgage = mortgagePrice;
-
+		isTaken = owned;
 	}
 
 	// Method for purchasing houses, may need more work
@@ -124,6 +126,10 @@ public class Deeds {
 	public boolean amIOwned() {
 		return isTaken;
 
+	}
+	
+	public int getPrice(){
+		return purchasePrice;
 	}
 
 	// Flips the property from owned to not owned and vice-versa when called

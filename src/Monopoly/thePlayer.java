@@ -75,6 +75,7 @@ public class thePlayer {
 
 	public void goToJail() {
 		playerInJail = true;
+		location = 41;
 	}
 
 	public void getOutOfJail() {

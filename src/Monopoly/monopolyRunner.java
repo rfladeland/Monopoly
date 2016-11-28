@@ -63,18 +63,22 @@ public class monopolyRunner {
 
 				// rolls the dice
 				case 1:
-					if (players[turnTracker].getRolled()) {
+					if (!(players[turnTracker].inJail()) && players[turnTracker].getRolled()) {
 						System.out.println("Sorry, but you cannot roll again this turn.");
-					} else if (players[turnTracker].inJail()) {
+						break;
+					}
+					if (players[turnTracker].inJail()) {
 						if (ConsoleUI.promptForBool("Would you like to pay $50 to get out of jail? (Y/N)", "Y", "N")) {
 							players[turnTracker].getOutOfJail();
 							players[turnTracker].pay(-50);
 						} else {
 							jailDoublesRoll(turnTracker);
 						}
-					} else {
 					}
-					roll(turnTracker);
+					if(!players[turnTracker].getRolled()){
+						roll(turnTracker);
+					}
+					
 					System.out.println("You are now on " + mb.getSpace(players[turnTracker].getLocation() - 1));
 					if (!(notBuyableSpaces.contains(mb.getSpace(players[turnTracker].getLocation() - 1)))
 							&& players[turnTracker].getMoney() >= bank.sellProperty(players[turnTracker].getLocation())
@@ -100,16 +104,15 @@ public class monopolyRunner {
 					} else {
 						players[turnTracker].purchaseHotels();
 					}
+					
 					break;
 					// ends the turn
 				case 3:
 					if (!players[turnTracker].getRolled()) {
 						System.out.println("Sorry, but you have to roll first.");
 						choice = -1;
-					} else {
-						break;
-					}
-
+					} 
+					break;
 					// "Quit game"
 					// auctions off everything
 					// removes player from game
@@ -184,23 +187,29 @@ public class monopolyRunner {
 		int rollingDice1 = genRan.nextInt(6) + 1;
 		int rollingDice2 = genRan.nextInt(6) + 1;
 		int sumOfRolls = rollingDice1 + rollingDice2;
-		System.out.println("You rolled " + rollingDice1 + " and " + rollingDice2 + ". Move " + sumOfRolls + " spaces.");
-		players[player].move(sumOfRolls);
+		System.out.println("You rolled " + rollingDice1 + " and " + rollingDice2 );
+		
 		if (rollingDice1 == rollingDice2) {
 			doubles++;
 			if (doubles == 3) {
+				System.out.println("You rolled doubles three times and are now in jail.");
 				players[player].goToJail();
 				doubles = 0;
-			} else {
-				players[player].flipRoll();
+			}else{
+				System.out.println("Move " + (rollingDice1 + rollingDice2) + " spaces.");
+				System.out.println("You rolled doubles, roll again.");		
+				players[player].move(sumOfRolls);
 			}
+			
 		}else{
+			System.out.println("Move " + (rollingDice1 + rollingDice2) + " spaces.");
+			players[player].move(sumOfRolls);
 			players[player].flipRoll();
 		}
 	}
 
 	public static boolean isOver() {
-		return (players.length > 1);
+		return (players.length <= 1);
 	}
 
 	public void playAgain() throws IOException {
@@ -237,17 +246,13 @@ public class monopolyRunner {
 	}
 
 	public static void addNotBuyable() {
-		notBuyableSpaces.add("1");
-		notBuyableSpaces.add("3");
-		notBuyableSpaces.add("5");
-		notBuyableSpaces.add("8");
-		notBuyableSpaces.add("11");
-		notBuyableSpaces.add("18");
-		notBuyableSpaces.add("21");
-		notBuyableSpaces.add("23");
-		notBuyableSpaces.add("31");
-		notBuyableSpaces.add("34");
-		notBuyableSpaces.add("37");
-		notBuyableSpaces.add("39");
+		notBuyableSpaces.add("Go");
+		notBuyableSpaces.add("Income Tax");
+		notBuyableSpaces.add("Chance");
+		notBuyableSpaces.add("Community Chest");
+		notBuyableSpaces.add("Luxury Tax");
+		notBuyableSpaces.add("Free Parking");
+		notBuyableSpaces.add("Go To Jail");
+		notBuyableSpaces.add("Just Visiting / In Jail");
 	}
 }

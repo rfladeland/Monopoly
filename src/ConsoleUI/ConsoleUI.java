@@ -25,11 +25,6 @@ public class ConsoleUI {
 		for (int i = 0; i < options.length; i++) {
 			System.out.println(i + 1 + " " + options[i]);
 		}
-		try {
-		}
-		catch (NumberFormatException ex) {
-			System.out.println(ex);
-		}
 		if (withQuit == true) {
 			minimum = 0;
 			System.out.println("0 Quit");
@@ -70,7 +65,7 @@ public class ConsoleUI {
 			try {
 			}
 			catch (NumberFormatException ex) {
-				System.out.println(ex);
+				System.out.println("Invalid input");
 			}
 			if (yboolean.equalsIgnoreCase(trueString)) {
 				nboolean = true;
@@ -112,7 +107,7 @@ public class ConsoleUI {
 				value = Byte.parseByte(input);
 			}
 			catch (NumberFormatException ex) {
-				System.out.println(ex);
+				value = (byte) (min-1);
 			}
 			if (value < min || value > max) {
 				isInputValid = false;
@@ -152,7 +147,7 @@ public class ConsoleUI {
 				value = Short.parseShort(input);
 			}
 			catch (NumberFormatException ex) {
-				System.out.println(ex);
+				value = (short) (min-1);
 			}
 			if (value < min || value > max) {
 				isInputValid = false;
@@ -194,7 +189,6 @@ public class ConsoleUI {
 				value = Integer.parseInt(input);
 			}
 			catch (NumberFormatException ex) {
-				System.out.println(ex);
 				value = min - 1;
 			}
 			if (value < min || value > max) {
@@ -234,7 +228,6 @@ public class ConsoleUI {
 				value = Long.parseLong(input);
 			}
 			catch (NumberFormatException ex) {
-				System.out.println(ex);
 				value = min - 1;
 			}
 			if (value < min || value > max) {
@@ -274,7 +267,6 @@ public class ConsoleUI {
 				value = Float.parseFloat(input);
 			}
 			catch (NumberFormatException ex) {
-				System.out.println(ex);
 				value = min - 1;
 			}
 			if (value < min || value > max) {
@@ -315,7 +307,6 @@ public class ConsoleUI {
 				value = Double.parseDouble(input);
 			}
 			catch (NumberFormatException ex) {
-				System.out.println(ex);
 				value = min - 1;
 			}
 			if (value < min || value > max) {
@@ -350,12 +341,7 @@ public class ConsoleUI {
 		boolean isInputValid = true;
 		do {
 			isInputValid = true;
-			try {
-				value = in.readLine();
-			}
-			catch (NumberFormatException ex) {
-				System.out.println(ex);
-			}
+			value = in.readLine();
 			if (allowEmpty == false) {
 				if (value.equals("")) {
 					System.out.println("Invalid. Must enter at least a word.");
@@ -396,7 +382,7 @@ public class ConsoleUI {
 				value = input.charAt(0);
 			}
 			catch (NumberFormatException ex) {
-				System.out.println(ex);
+				value = (char) (min-1);
 			}
 			if (value < min || value > max) {
 				isInputValid = false;

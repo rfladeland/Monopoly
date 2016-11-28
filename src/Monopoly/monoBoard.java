@@ -59,6 +59,7 @@ public class monoBoard {
 		board.add("Park Place");
 		board.add("Luxury Tax");
 		board.add("Boardwalk");
+		board.add("In Jail");
 	}
 	public String getSpace(int space){
 		return board.get(space);

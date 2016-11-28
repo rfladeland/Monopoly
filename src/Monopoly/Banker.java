@@ -52,7 +52,7 @@ public class Banker {
 		
 		//Yellow
 		properties.add(new Deeds("Atlantic Avenue", "Yellow", 27, 260, 22, 150, 110, 330, 800, 975, 1150, 130, false));
-		properties.add(new Deeds("Ventnor Avenue", "Yellow", 29, 260, 22, 150, 110, 330, 800, 975, 1150, 130, false));
+		properties.add(new Deeds("Ventor Avenue", "Yellow", 29, 260, 22, 150, 110, 330, 800, 975, 1150, 130, false));
 		properties.add(new Deeds("Marvin Gardens", "Yellow", 30, 280, 24, 150, 120, 360, 850, 1025, 1200, 140, false));
 	
 		//Green

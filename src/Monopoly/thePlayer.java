@@ -79,6 +79,7 @@ public class thePlayer {
 
 	public void getOutOfJail() {
 		playerInJail = false;
+		location = 11;
 	}
 
 	public int getLocation() {
@@ -88,7 +89,12 @@ public class thePlayer {
 	public boolean getRolled() {
 		return hasRolled;
 	}
-
+	
+	public void addCard(cards card){
+		ownedCards.add(card);
+	}
+	
+	
 	public void mortgageMenu() throws IOException {
 		boolean mortgagedProperty = false;
 		String[] mortMenu = { "Mortgage", "Pay off mortgage" };

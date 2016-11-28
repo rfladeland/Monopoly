@@ -96,12 +96,10 @@ public class thePlayer {
 	
 	
 	public void mortgageMenu() throws IOException {
-		boolean mortgagedProperty = false;
 		String[] mortMenu = { "Mortgage", "Pay off mortgage" };
 		System.out.println("What would you like to do?");
 		int choice = ConsoleUI.promptForMenuSelection(mortMenu, false);
 		if (ownedProperties.size() > 0) {
-			int mortgagedAmount = 0;
 			switch (choice) {
 			case 1:
 				String[] stringProperties = new String[ownedProperties.size()];
@@ -109,21 +107,16 @@ public class thePlayer {
 				int i = 0;
 				for (Deeds item : ownedProperties) {
 					stringProperties[i] = item.getName();
-					mortgagedAmount = 0; //mortgagedAmount would depend on the property
-					mortgagedProperty = true;
 				}
 				String property = ownedProperties.get(ConsoleUI.promptForMenuSelection(stringProperties, false))
 						.getName();
+				
+				
 			case 2:
-				if(mortgagedProperty = true){
-					money -= mortgagedAmount;
-				}else{
-//					money -= mortgage; //base price
-				}
+				
 			}
 		} else {
 			System.out.println("You don't have anything to mortgage.");
-			mortgagedProperty = false;
 		}
 	}
 

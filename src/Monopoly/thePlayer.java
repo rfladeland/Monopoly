@@ -115,9 +115,59 @@ public class thePlayer {
 		return money;
 	}
 
-
+	public void pay(int amount){
+		money += amount;
+	}
 	public void buyPiece(Deeds property) {
 		ownedProperties.add(property);
 		money -= property.getCurRent();
+	}
+
+
+	public boolean inJail() {
+		return playerInJail;
+	}
+
+
+	public int getJailTurn() {
+		return jailTurnCounter;
+	}
+
+
+	public void incJailTurn() {
+	jailTurnCounter += 1;		
+	}
+
+
+	public void purchaseHouses() throws IOException {
+		String[] tempPlayerDeeds = new String[ownedProperties.size()];
+		int i =0;
+		for(Deeds item : ownedProperties){
+			tempPlayerDeeds[i] = item.getName();
+			i++;
+		}
+		System.out.println("Which space would you like to buy a house for?");
+		int chosenDeed = ConsoleUI.promptForMenuSelection(tempPlayerDeeds, true);
+		if(chosenDeed == 0){
+			return;
+		}else{
+			ownedProperties.get(chosenDeed).purchaseHouses();
+		}
+	}
+	
+	public void purchaseHotels() throws IOException {
+		String[] tempPlayerDeeds = new String[ownedProperties.size()];
+		int i =0;
+		for(Deeds item : ownedProperties){
+			tempPlayerDeeds[i] = item.getName();
+			i++;
+		}
+		System.out.println("Which space would you like to buy a hotel for?");
+		int chosenDeed = ConsoleUI.promptForMenuSelection(tempPlayerDeeds, true);
+		if(chosenDeed == 0){
+			return;
+		}else{
+			ownedProperties.get(chosenDeed).purchaseHotels();
+		}
 	}
 }

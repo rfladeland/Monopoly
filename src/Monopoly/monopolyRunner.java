@@ -18,6 +18,7 @@ public class monopolyRunner {
 	private static String[] playerMenu = { "Roll", "Buy houses/ hotels", "End Turn", "Quit", "Mortgage / Unmortgage" };
 	private static String[] listOfPieces = { "Battleship", "Cannon", "Car", "Dog", "Hat", "Shoe", "Thimble",
 			"Wheelbarrow" };
+	private static int doubles = 0;
 
 	public static void main(String[] args) throws IOException {
 
@@ -48,6 +49,7 @@ public class monopolyRunner {
 		int turnTracker = 0;
 		int choice = -1;
 		// loop for the entire game
+
 		do {
 			// Jail//
 			// Doubles//
@@ -63,26 +65,42 @@ public class monopolyRunner {
 				case 1:
 					if (players[turnTracker].getRolled()) {
 						System.out.println("Sorry, but you cannot roll again this turn.");
+					} else if (players[turnTracker].inJail()) {
+						if (ConsoleUI.promptForBool("Would you like to pay $50 to get out of jail? (Y/N)", "Y", "N")) {
+							players[turnTracker].getOutOfJail();
+							players[turnTracker].pay(-50);
+						} else {
+							jailDoublesRoll(turnTracker);
+						}
 					} else {
-						roll(turnTracker);
-						players[turnTracker].flipRoll();
-						System.out.println("You are now on " + mb.getSpace(players[turnTracker].getLocation() - 1));
-						if (!(notBuyableSpaces.contains(mb.getSpace(players[turnTracker].getLocation() - 1)))
-								&& players[turnTracker].getMoney() >= bank
-										.sellProperty(players[turnTracker].getLocation()).getCurRent()) {
-							if (ConsoleUI.promptForBool("Would you like to buy this property?(Y/N)", "Y", "N")) {
-								players[turnTracker].buyPiece(bank.sellProperty(players[turnTracker].getLocation()));
-								bank.removePiece(players[turnTracker].getLocation());
-							} else {
-								auction(bank.sellProperty(players[turnTracker].getLocation()));
-							}
+					}
+					roll(turnTracker);
+					System.out.println("You are now on " + mb.getSpace(players[turnTracker].getLocation() - 1));
+					if (!(notBuyableSpaces.contains(mb.getSpace(players[turnTracker].getLocation() - 1)))
+							&& players[turnTracker].getMoney() >= bank.sellProperty(players[turnTracker].getLocation())
+									.getCurRent()) {
+						if (ConsoleUI.promptForBool("Would you like to buy this property?(Y/N)", "Y", "N")) {
+							players[turnTracker].buyPiece(bank.sellProperty(players[turnTracker].getLocation()));
+							bank.removePiece(players[turnTracker].getLocation());
+						} else {
+							auction(bank.sellProperty(players[turnTracker].getLocation()));
 						}
 					}
-
+					break;
+					
 					// buys houses / hotels
 				case 2:
-					System.out.println("This space costs " + 1);
-
+					String[] purchaseList = { "Purchase a house", "Purchase a Hotel" };
+					System.out.println("Which would you like to do?");
+					int purchChoice = ConsoleUI.promptForMenuSelection(purchaseList, true);
+					if (purchChoice == 0) {
+						break;
+					} else if (purchChoice == 1) {
+						players[turnTracker].purchaseHouses();
+					} else {
+						players[turnTracker].purchaseHotels();
+					}
+					break;
 					// ends the turn
 				case 3:
 					if (!players[turnTracker].getRolled()) {
@@ -96,38 +114,60 @@ public class monopolyRunner {
 					// auctions off everything
 					// removes player from game
 				case 4:
-
+					break;
 					// mortgage / unmortgage
 				case 5:
 					players[turnTracker].mortgageMenu();
-
+					break;
+					
 					// trade
 				case 6:
 					// trade(players[turnTracker]);
-
+					break;
 					// sell houses and hotels
 				case 7:
 					// players[turnTracker].sell();
-
+					break;
+					
 					// show player money as well
 					// as owned properties
 					// goes into a different method with a different menu
 				case 8:
-
+					break;
+					
 					// Auction off specific deeds that you own
 					// No buildings are allowed
 				case 9:
-
+					break;
 				}
 			} while (choice != 3);
 			players[turnTracker].flipRoll();
 			turnTracker++;
 		} while (!isOver());
+	}
 
+	private static void jailDoublesRoll(int player) {
+		Random genRan = new Random();
+		int rollingDice1 = genRan.nextInt(6) + 1;
+		int rollingDice2 = genRan.nextInt(6) + 1;
+		if (rollingDice1 == rollingDice2) {
+			System.out.println("You rolled doubles, you are no longer in jail.");
+			players[player].getOutOfJail();
+			players[player].flipRoll();
+		} else if (players[player].getJailTurn() == 3) {
+			System.out.println("You didn't roll doubles and it is your third turn in jail.");
+			System.out.println("You get out of jail, but have to pay $50");
+			players[player].getOutOfJail();
+			players[player].pay(-50);
+			players[player].flipRoll();
+		} else {
+			System.out.println("You didn't roll doubles.");
+			players[player].incJailTurn();
+		}
 	}
 
 	private static void auction(Deeds sellProperty) {
-		
+
 	}
 
 	public static int pickingGamePiece() throws IOException {
@@ -146,6 +186,17 @@ public class monopolyRunner {
 		int sumOfRolls = rollingDice1 + rollingDice2;
 		System.out.println("You rolled " + rollingDice1 + " and " + rollingDice2 + ". Move " + sumOfRolls + " spaces.");
 		players[player].move(sumOfRolls);
+		if (rollingDice1 == rollingDice2) {
+			doubles++;
+			if (doubles == 3) {
+				players[player].goToJail();
+				doubles = 0;
+			} else {
+				players[player].flipRoll();
+			}
+		}else{
+			players[player].flipRoll();
+		}
 	}
 
 	public static boolean isOver() {

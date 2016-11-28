@@ -75,10 +75,10 @@ public class monopolyRunner {
 							jailDoublesRoll(turnTracker);
 						}
 					}
-					if(!players[turnTracker].getRolled()){
+					if (!players[turnTracker].getRolled()) {
 						roll(turnTracker);
 					}
-					
+
 					System.out.println("You are now on " + mb.getSpace(players[turnTracker].getLocation() - 1));
 					if (!(notBuyableSpaces.contains(mb.getSpace(players[turnTracker].getLocation() - 1)))
 							&& players[turnTracker].getMoney() >= bank.sellProperty(players[turnTracker].getLocation())
@@ -91,8 +91,8 @@ public class monopolyRunner {
 						}
 					}
 					break;
-					
-					// buys houses / hotels
+
+				// buys houses / hotels
 				case 2:
 					String[] purchaseList = { "Purchase a house", "Purchase a Hotel" };
 					System.out.println("Which would you like to do?");
@@ -104,42 +104,44 @@ public class monopolyRunner {
 					} else {
 						players[turnTracker].purchaseHotels();
 					}
-					
 					break;
-					// ends the turn
+					
+				// ends the turn
 				case 3:
 					if (!players[turnTracker].getRolled()) {
 						System.out.println("Sorry, but you have to roll first.");
 						choice = -1;
-					} 
+					}
 					break;
-					// "Quit game"
-					// auctions off everything
-					// removes player from game
+				// "Quit game"
+				// auctions off everything
+				// removes player from game
 				case 4:
 					break;
-					// mortgage / unmortgage
+					
+				// mortgage / unmortgage
 				case 5:
 					players[turnTracker].mortgageMenu();
 					break;
-					
-					// trade
+
+				// trade
 				case 6:
 					// trade(players[turnTracker]);
 					break;
-					// sell houses and hotels
+					
+				// sell houses and hotels
 				case 7:
 					// players[turnTracker].sell();
 					break;
-					
-					// show player money as well
-					// as owned properties
-					// goes into a different method with a different menu
+
+				// show player money as well
+				// as owned properties
+				// goes into a different method with a different menu
 				case 8:
 					break;
-					
-					// Auction off specific deeds that you own
-					// No buildings are allowed
+
+				// Auction off specific deeds that you own
+				// No buildings are allowed
 				case 9:
 					break;
 				}
@@ -187,21 +189,21 @@ public class monopolyRunner {
 		int rollingDice1 = genRan.nextInt(6) + 1;
 		int rollingDice2 = genRan.nextInt(6) + 1;
 		int sumOfRolls = rollingDice1 + rollingDice2;
-		System.out.println("You rolled " + rollingDice1 + " and " + rollingDice2 );
-		
+		System.out.println("You rolled " + rollingDice1 + " and " + rollingDice2);
+
 		if (rollingDice1 == rollingDice2) {
 			doubles++;
 			if (doubles == 3) {
 				System.out.println("You rolled doubles three times and are now in jail.");
 				players[player].goToJail();
 				doubles = 0;
-			}else{
+			} else {
 				System.out.println("Move " + (rollingDice1 + rollingDice2) + " spaces.");
-				System.out.println("You rolled doubles, roll again.");		
+				System.out.println("You rolled doubles, roll again.");
 				players[player].move(sumOfRolls);
 			}
-			
-		}else{
+
+		} else {
 			System.out.println("Move " + (rollingDice1 + rollingDice2) + " spaces.");
 			players[player].move(sumOfRolls);
 			players[player].flipRoll();

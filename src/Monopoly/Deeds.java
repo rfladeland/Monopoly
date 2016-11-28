@@ -80,30 +80,21 @@ public class Deeds {
 
 	// Method for purchasing houses, may need more work
 	public void purchaseHouses() throws IOException {
-
-		numOfHouses = ConsoleUI.promptForInt("How many houses would you like to purchase?", 0, 4);
-
-		purchasePrice = houseHotelPurchasePrice * numOfHouses;
-
-		System.out.println(
-				"You have purchased " + numOfHouses + " houses, and the total cost was " + purchasePrice + " dollars.");
-
+		System.out.println("You bought a house for $" + houseHotelPurchasePrice);
+		numOfHouses += 1;
+		setRent();
 	}
 
 	// Method for purchasing hotels, may need more work
-	public void purchaseHotels() throws IOException {
-		numOfHotels = ConsoleUI.promptForInt("How many hotels would you like to purchase?", 0, 1);
-		if (numOfHotels == 1) {
-			purchasePrice = houseHotelPurchasePrice * numOfHotels;
-			System.out.println("You have purchased one hotel for " + purchasePrice + " dollars.");
-		} else {
-			System.out.println("You didn't buy a hotel.");
-		}
+	public void purchaseHotels(){
+		System.out.println("You bought a hotel for $" + houseHotelPurchasePrice);
+		numOfHotels = 1;
+		setRent();
 	}
 
-	public void setRent(int house, int hotel) {
-		if (hotel == 0) {
-			switch (house) {
+	public void setRent() {
+		if (numOfHotels == 0) {
+			switch (numOfHouses) {
 			case 1:
 				curRent = house1Rent;
 				break;
@@ -166,5 +157,17 @@ public class Deeds {
 
 	public void mortgage() {
 		isMortgaged = true;
+	}
+
+	public int getHotel() {
+		return numOfHotels;
+	}
+	
+	public int getHouse(){
+		return numOfHouses;
+	}
+
+	public int getHouseHotelCost() {
+	return houseHotelPurchasePrice;
 	}
 }

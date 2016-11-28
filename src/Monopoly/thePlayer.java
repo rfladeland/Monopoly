@@ -24,8 +24,7 @@ public class thePlayer {
 		money = 1500;
 		location = 1;
 	}
-	
-	
+
 	// Thimble, Cannon, Hat, Dog, Battleship, Car, Shoe, Wheelbarrow
 	public void setPiece(String playerPiece) {
 		switch (playerPiece) {
@@ -107,7 +106,7 @@ public class thePlayer {
 						.getName();
 			case 2:
 			}
-		}else{
+		} else {
 			System.out.println("You don't have anything to mortgage.");
 		}
 	}
@@ -116,60 +115,173 @@ public class thePlayer {
 		return money;
 	}
 
-	public void pay(int amount){
+	public void pay(int amount) {
 		money += amount;
 	}
+
 	public void buyPiece(Deeds property) {
 		System.out.println("You paid " + property.getPrice() + " for " + property.getName());
 		ownedProperties.add(property);
 		money -= property.getPrice();
 	}
 
-
 	public boolean inJail() {
 		return playerInJail;
 	}
-
 
 	public int getJailTurn() {
 		return jailTurnCounter;
 	}
 
-
 	public void incJailTurn() {
-	jailTurnCounter += 1;		
+		jailTurnCounter += 1;
 	}
-
 
 	public void purchaseHouses() throws IOException {
 		String[] tempPlayerDeeds = new String[ownedProperties.size()];
-		int i =0;
-		for(Deeds item : ownedProperties){
+		int i = 0;
+		for (Deeds item : ownedProperties) {
 			tempPlayerDeeds[i] = item.getName();
 			i++;
 		}
 		System.out.println("Which space would you like to buy a house for?");
 		int chosenDeed = ConsoleUI.promptForMenuSelection(tempPlayerDeeds, true);
-		if(chosenDeed == 0){
+		if (chosenDeed == 0) {
 			return;
-		}else{
-			ownedProperties.get(chosenDeed).purchaseHouses();
+		}
+		if (ownedProperties.get(chosenDeed).getHouse() < 4) {
+			if (money >= ownedProperties.get(chosenDeed).getHouseHotelCost()) {
+				if (ownedProperties.get(chosenDeed).getColor().equals("Black")
+						|| ownedProperties.get(chosenDeed).getColor().equals("White")) {
+					System.out.println("Sorry, but you cannot build a hpuse on this space.");
+				} else if (ownedProperties.get(chosenDeed).getColor().equals("Brown")) {
+					for (Deeds item : ownedProperties) {
+						if (item.getColor().equals("Brown")
+								&& !(item.getName().equals(ownedProperties.get(chosenDeed).getName()))
+								&& item.getHouse() <= ownedProperties.get(chosenDeed).getHouse()) {
+							if (ownedProperties.get(chosenDeed).getHouse() < 4) {
+								money -= ownedProperties.get(chosenDeed).getHouseHotelCost();
+								ownedProperties.get(chosenDeed).purchaseHouses();
+							} else {
+								System.out.println("You already have 4 houses here and cannot build any more.");
+							}
+						}
+						System.out.println("You cannot build a house here.");
+					}
+				} else if (ownedProperties.get(chosenDeed).getColor().equals("Dark Blue")) {
+					for (Deeds item : ownedProperties) {
+						if (item.getColor().equals("Dark Blue")
+								&& !(item.getName().equals(ownedProperties.get(chosenDeed).getName()))
+								&& item.getHouse() <= ownedProperties.get(chosenDeed).getHouse()) {
+							if (ownedProperties.get(chosenDeed).getHouse() < 4) {
+								money -= ownedProperties.get(chosenDeed).getHouseHotelCost();
+								ownedProperties.get(chosenDeed).purchaseHouses();
+							} else {
+								System.out.println("You already have 4 houses here and cannot build any more.");
+							}
+						}
+						System.out.println("You cannot build a house here.");
+
+					}
+				} else {
+					int propTracker = 1;
+					for (Deeds item : ownedProperties) {
+						if (item.getColor().equals(ownedProperties.get(chosenDeed).getColor())
+								&& !(item.getName().equals(ownedProperties.get(chosenDeed).getName()))) {
+							propTracker += 1;
+						}
+					}
+					if (propTracker == 3) {
+						int minHousesIndex = chosenDeed;
+						for (i = 0; i < ownedProperties.size(); i++) {
+							if (ownedProperties.get(i).getColor().equals(ownedProperties.get(chosenDeed).getColor())
+									&& !(ownedProperties.get(i).getName()
+											.equals(ownedProperties.get(chosenDeed).getName()))
+									&& ownedProperties.get(i).getHouse() < ownedProperties.get(chosenDeed).getHouse()) {
+								minHousesIndex = i;
+							}
+
+						}
+						if (minHousesIndex == chosenDeed) {
+							System.out.println(
+									"You bought a house for $" + ownedProperties.get(chosenDeed).getHouseHotelCost());
+							money -= ownedProperties.get(chosenDeed).getHouseHotelCost();
+							ownedProperties.get(chosenDeed).purchaseHouses();
+						} else {
+							System.out.println(
+									"You cannot build a house here because you have to build houses evenly across all same colored spaces.");
+						}
+					} else {
+						System.out.println("You cannot build a house here because you do not own all three "
+								+ ownedProperties.get(chosenDeed).getColor().toLowerCase() + " spaces.");
+					}
+				}
+			}
+		} else {
+			System.out.println("You cannot build a house here because there are already 4 houses here.");
 		}
 	}
-	
+
 	public void purchaseHotels() throws IOException {
 		String[] tempPlayerDeeds = new String[ownedProperties.size()];
-		int i =0;
-		for(Deeds item : ownedProperties){
+		int i = 0;
+		for (Deeds item : ownedProperties) {
 			tempPlayerDeeds[i] = item.getName();
 			i++;
 		}
 		System.out.println("Which space would you like to buy a hotel for?");
 		int chosenDeed = ConsoleUI.promptForMenuSelection(tempPlayerDeeds, true);
-		if(chosenDeed == 0){
+		if (chosenDeed == 0) {
 			return;
-		}else{
-			ownedProperties.get(chosenDeed).purchaseHotels();
+		} else {
+			if (money >= ownedProperties.get(chosenDeed).getHouseHotelCost()) {
+				if (ownedProperties.get(chosenDeed).getHotel() == 0) {
+					if (ownedProperties.get(chosenDeed).getColor().equals("Black")
+							|| ownedProperties.get(chosenDeed).getColor().equals("White")) {
+						System.out.println("Sorry, but you cannot build a hotel on this space.");
+					} else if (ownedProperties.get(chosenDeed).getColor().equals("Brown")) {
+						for (Deeds item : ownedProperties) {
+							if (item.getColor().equals("Brown")
+									&& !(item.getName().equals(ownedProperties.get(chosenDeed).getName()))
+									&& item.getHouse() == 4) {
+								money -= ownedProperties.get(chosenDeed).getHouseHotelCost();
+								ownedProperties.get(chosenDeed).purchaseHotels();
+							}
+							System.out.println("You cannot build a hotel here.");
+						}
+					} else if (ownedProperties.get(chosenDeed).getColor().equals("Dark Blue")) {
+						for (Deeds item : ownedProperties) {
+							if (item.getColor().equals("Dark Blue")
+									&& !(item.getName().equals(ownedProperties.get(chosenDeed).getName()))
+									&& item.getHouse() == 4) {
+								money -= ownedProperties.get(chosenDeed).getHouseHotelCost();
+								ownedProperties.get(chosenDeed).purchaseHotels();
+							}
+							System.out.println("You cannot build a hotel here.");
+
+						}
+					} else {
+						int propTracker = 1;
+						for (Deeds item : ownedProperties) {
+							if (item.getColor().equals(ownedProperties.get(chosenDeed).getColor())
+									&& !(item.getName().equals(ownedProperties.get(chosenDeed).getName()))
+									&& item.getHouse() == 4) {
+								propTracker += 1;
+							}
+						}
+						if (propTracker == 3) {
+							money -= ownedProperties.get(chosenDeed).getHouseHotelCost();
+							ownedProperties.get(chosenDeed).purchaseHotels();
+						} else {
+							System.out.println("You cannot build a hotel here.");
+						}
+					}
+				} else {
+					System.out.println("You already have a hotel here, you cannot build another one.");
+				}
+			} else {
+				System.out.println("You are too poor to afford a hotel.");
+			}
 		}
 	}
 }

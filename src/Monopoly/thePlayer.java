@@ -101,7 +101,6 @@ public class thePlayer {
 		String[] mortMenu = { "Mortgage", "Pay off mortgage" };
 		System.out.println("What would you like to do?");
 		int choice = ConsoleUI.promptForMenuSelection(mortMenu, false);
-		//when there's another property added, the newest property is set to 1 and the rest are nulls
 		if (ownedProperties.size() > 0) {
 			switch (choice) {
 			case 1:
@@ -114,25 +113,25 @@ public class thePlayer {
 				String property = ownedProperties.get(ConsoleUI.promptForMenuSelection(stringProperties, false))
 						.getName();
 				
-				for(Deeds mortgage : mortgagedProperties){ //setting a name with the arrayList for mortgagedProperties
-					if(mortgage.isMortgaged = false){ //isMortgaged boolean from Deeds class
-						//mortgages the property
-						mortgagedProperties = property.getMortgage(); //getting the mortgage amount from deeds
-						isMortgaged = true; //isMortgaged boolean from Deeds class
-					}else{
-						//property is already mortgaged
-						System.out.println("Property is already mortgaged.");
-					}
-				}
+//				for(Deeds mortgage : mortgagedProperties){ //setting a name with the arrayList for mortgagedProperties
+//					if(mortgage.isMortgaged = false){ //isMortgaged boolean from Deeds class
+//						//mortgages the property
+//						//getting the mortgage amount from deeds
+//						isMortgaged = true; //isMortgaged boolean from Deeds class
+//					}else{
+//						//property is already mortgaged
+//						System.out.println("Property is already mortgaged.");
+//					}
+//				}
 				
 			case 2:
-				if(isMortgaged = false){
-					//pays base price
-					money -= mortgagedPrice; //placeholder
-				}else{
-					//pays mortgaged price
-					money -= rent; //placeholder???
-				}
+//				if(isMortgaged = false){
+//					//pays base price
+//					money -= mortgagedPrice; //placeholder
+//				}else{
+//					//pays mortgaged price
+//					money -= rent; //placeholder???
+//				}
 			}
 		} else {
 			System.out.println("You don't have anything to mortgage.");
@@ -318,4 +317,10 @@ public class thePlayer {
 	public void setCanRoll(boolean b) {
 		canRoll = b;	
 		}
+	
+	public boolean checkPropertyOwned(String title){
+		//goes through mortgaged and unmortgaged, sees whether or not the property is owned, return boolean if it's not
+		//for rent
+		return false;
+	}
 }

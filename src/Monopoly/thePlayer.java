@@ -16,6 +16,7 @@ public class thePlayer {
 	private gamePieces piece;
 	private boolean hasRolled = false;
 	private boolean playerInJail = false;
+	private boolean canRoll = true;
 	private int jailTurnCounter = 0;
 	private int money;
 	private int location;
@@ -293,4 +294,10 @@ public class thePlayer {
 			}
 		}
 	}
+	public boolean getCanRoll(){
+		return canRoll;
+	}
+	public void setCanRoll(boolean b) {
+		canRoll = b;	
+		}
 }

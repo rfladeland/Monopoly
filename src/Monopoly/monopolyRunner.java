@@ -65,6 +65,7 @@ public class monopolyRunner {
 			// loop for the individual turns
 			do {
 				turnTracker %= numPlayers;
+				
 				System.out.println(players[turnTracker].getPiece() + " it is your turn. What would you like to do?");
 				choice = ConsoleUI.promptForMenuSelection(playerMenu, false);
 				switch (choice) {
@@ -75,7 +76,7 @@ public class monopolyRunner {
 						System.out.println("Sorry, but you cannot roll again this turn.");
 						break;
 					}
-					if (players[turnTracker].inJail()) {
+					if (players[turnTracker].inJail() && players[turnTracker].getCanRoll()) {
 						if (ConsoleUI.promptForBool("Would you like to pay $50 to get out of jail? (Y/N)", "Y", "N")) {
 							players[turnTracker].getOutOfJail();
 							players[turnTracker].pay(-50);
@@ -83,7 +84,10 @@ public class monopolyRunner {
 							jailDoublesRoll(turnTracker);
 						}
 					}
-					if (!players[turnTracker].getRolled()) {
+					if(players[turnTracker].inJail() && !players[turnTracker].getCanRoll() && !players[turnTracker].getRolled()){
+						System.out.println("Sorry, but you cannot roll this turn.");
+					}
+					if (!players[turnTracker].getRolled() && players[turnTracker].getCanRoll()) {
 						roll(turnTracker);
 					}
 
@@ -95,11 +99,12 @@ public class monopolyRunner {
 							players[turnTracker].buyPiece(bank.sellProperty(players[turnTracker].getLocation()));
 							bank.removePiece(players[turnTracker].getLocation());
 						} else {
-							auction(bank.sellProperty(players[turnTracker].getLocation()));
+							auction(bank.sellProperty(players[turnTracker].getLocation()), players , players[turnTracker]);
 						}
 					}else if(mb.getSpace(players[turnTracker].getLocation()-1).equals("Go To Jail")){
 						System.out.println("You are now in jail.");
 						players[turnTracker].goToJail();
+						players[turnTracker].setCanRoll(false);
 					}else if (mb.getSpace(players[turnTracker].getLocation()-1).equals("Chance")) {
 							cards drawn = drawCard(Chance);
 							System.out.println("The card you drew was : " + drawn.getText());
@@ -165,6 +170,7 @@ public class monopolyRunner {
 				}
 			} while (choice != 3);
 			players[turnTracker].flipRoll();
+			players[turnTracker].setCanRoll(true);
 			turnTracker++;
 		} while (!isOver());
 	}
@@ -218,21 +224,37 @@ public class monopolyRunner {
 		if (rollingDice1 == rollingDice2) {
 			System.out.println("You rolled doubles, you are no longer in jail.");
 			players[player].getOutOfJail();
+			players[player].setCanRoll(false);
 			players[player].flipRoll();
 		} else if (players[player].getJailTurn() == 3) {
 			System.out.println("You didn't roll doubles and it is your third turn in jail.");
 			System.out.println("You get out of jail, but have to pay $50");
 			players[player].getOutOfJail();
+			players[player].setCanRoll(false);
 			players[player].pay(-50);
 			players[player].flipRoll();
 		} else {
 			System.out.println("You didn't roll doubles.");
 			players[player].incJailTurn();
+			players[player].flipRoll();
+			players[player].setCanRoll(false);
 		}
 	}
 
-	private static void auction(Deeds sellProperty) {
-
+	private static void auction(Deeds sellProperty, thePlayer[] participants, thePlayer seller) {
+		ArrayList<thePlayer> nonParticipants = new ArrayList<thePlayer>();
+		nonParticipants.add(seller);
+		String[] participantChoices ={"Bid", "Give Up" , "Look at Stats"};
+		String maxBidPlayer = "";
+		String choice = "";
+		int maxBid = 0;
+		int curBid = 0;
+		while(maxBid == 0 || participants.length > 1){
+			
+			for(thePlayer curBidder : participants){
+				
+			}
+		}
 	}
 
 	public static int pickingGamePiece() throws IOException {
@@ -256,6 +278,7 @@ public class monopolyRunner {
 			if (doubles == 3) {
 				System.out.println("You rolled doubles three times and are now in jail.");
 				players[player].goToJail();
+				players[player].setCanRoll(false);
 				doubles = 0;
 			} else {
 				System.out.println("Move " + (rollingDice1 + rollingDice2) + " spaces.");
@@ -317,5 +340,6 @@ public class monopolyRunner {
 		notBuyableSpaces.add("Free Parking");
 		notBuyableSpaces.add("Go To Jail");
 		notBuyableSpaces.add("Just Visiting / In Jail");
+		notBuyableSpaces.add("In Jail");
 	}
 }

@@ -92,4 +92,17 @@ public class Banker {
 			}
 		}
 	}
+	
+	public boolean checkPropertyOwned(String title){
+		//goes through properties
+		//sees whether or not the property is owned
+		//return boolean if it's not
+		if(properties.contains(title)){
+			//returns false if property is not owned
+			return false;
+		}else{
+			//returns true if property is owned
+			return true;
+		}
+	}
 }

@@ -241,18 +241,38 @@ public class monopolyRunner {
 		}
 	}
 
-	private static void auction(Deeds sellProperty, thePlayer[] participants, thePlayer seller) {
+	private static void auction(Deeds sellProperty, thePlayer[] participants, thePlayer seller) throws IOException{
 		ArrayList<thePlayer> nonParticipants = new ArrayList<thePlayer>();
 		nonParticipants.add(seller);
-		String[] participantChoices ={"Bid", "Give Up" , "Look at Stats"};
+		removeBidder(participants, seller.getPiece());
+		String[] participantChoices ={"Bid", "Give Up" , "Look at Stats of Property"};
 		String maxBidPlayer = "";
-		String choice = "";
+		int choice = -1;
 		int maxBid = 0;
-		int curBid = 0;
 		while(maxBid == 0 || participants.length > 1){
-			
 			for(thePlayer curBidder : participants){
-				
+				System.out.println("What would you like to do?");
+				choice = ConsoleUI.promptForMenuSelection(participantChoices, false);
+				switch(choice){
+				case 1:
+					if(curBidder.getMoney() > maxBid){
+					maxBid = ConsoleUI.promptForInt("How much would you like to bid?", maxBid, curBidder.getMoney());
+					maxBidPlayer = curBidder.getPiece();
+					System.out.println(curBidder.getPiece() + " you bid $" + maxBid + ".");
+					}else{
+						System.out.println(curBidder.getPiece() + ", you are too poor to go on any more. You cannot compete in this auction.");
+						nonParticipants.add(curBidder);
+						participants = removeBidder(participants, curBidder.getPiece());
+					}
+				case 2:
+					nonParticipants.add(curBidder);
+					participants = removeBidder(participants, curBidder.getPiece());
+				case 3:
+					System.out.println("The Deed name is " + sellProperty.getName());
+					System.out.println("The base rent is " + sellProperty.getCurRent());
+					System.out.println("Houses and Hotels cost " + sellProperty.getHouseHotelCost());
+					System.out.println("Mortgages for " + sellProperty.getMortgage());
+				}
 			}
 		}
 	}

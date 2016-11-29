@@ -11,6 +11,10 @@ public class monopolyRunner {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	private static int numPlayers;
 	private static ArrayList<String> notBuyableSpaces = new ArrayList<String>();
+	private static ArrayList<cards> Chance = new ArrayList<cards>();
+	private static ArrayList<cards> usedChance = new ArrayList<cards>();
+	private static ArrayList<cards> CommunityChest = new ArrayList<cards>();
+	private static ArrayList<cards> usedCommunityChest = new ArrayList<cards>();
 	private static monoMenu mm = new monoMenu();
 	private static monoBoard mb = new monoBoard();
 	private static Banker bank = new Banker();
@@ -26,6 +30,10 @@ public class monopolyRunner {
 		final int MIN_PLAYERS = 2;
 		mm.menu();
 		addNotBuyable();
+		addChanceCards();
+		//shuffle(Chance);
+		addCommunityChestCards();
+		//shuffle(CommunityChest);
 		System.out.println("Monopoly is booted up.");
 		int numPlayers = ConsoleUI.promptForInt("How many people will be playing?", MIN_PLAYERS, MAX_PLAYERS);
 		System.out.println("There are " + numPlayers + " players for this game.");
@@ -57,6 +65,7 @@ public class monopolyRunner {
 			// loop for the individual turns
 			do {
 				turnTracker %= numPlayers;
+				
 				System.out.println(players[turnTracker].getPiece() + " it is your turn. What would you like to do?");
 				choice = ConsoleUI.promptForMenuSelection(playerMenu, false);
 				switch (choice) {
@@ -67,7 +76,7 @@ public class monopolyRunner {
 						System.out.println("Sorry, but you cannot roll again this turn.");
 						break;
 					}
-					if (players[turnTracker].inJail()) {
+					if (players[turnTracker].inJail() && players[turnTracker].getCanRoll()) {
 						if (ConsoleUI.promptForBool("Would you like to pay $50 to get out of jail? (Y/N)", "Y", "N")) {
 							players[turnTracker].getOutOfJail();
 							players[turnTracker].pay(-50);
@@ -75,7 +84,10 @@ public class monopolyRunner {
 							jailDoublesRoll(turnTracker);
 						}
 					}
-					if (!players[turnTracker].getRolled()) {
+					if(players[turnTracker].inJail() && !players[turnTracker].getCanRoll() && !players[turnTracker].getRolled()){
+						System.out.println("Sorry, but you cannot roll this turn.");
+					}
+					if (!players[turnTracker].getRolled() && players[turnTracker].getCanRoll()) {
 						roll(turnTracker);
 					}
 
@@ -87,8 +99,19 @@ public class monopolyRunner {
 							players[turnTracker].buyPiece(bank.sellProperty(players[turnTracker].getLocation()));
 							bank.removePiece(players[turnTracker].getLocation());
 						} else {
-							auction(bank.sellProperty(players[turnTracker].getLocation()));
+							auction(bank.sellProperty(players[turnTracker].getLocation()), players , players[turnTracker]);
 						}
+					}else if(mb.getSpace(players[turnTracker].getLocation()-1).equals("Go To Jail")){
+						System.out.println("You are now in jail.");
+						players[turnTracker].goToJail();
+						players[turnTracker].setCanRoll(false);
+					}else if (mb.getSpace(players[turnTracker].getLocation()-1).equals("Chance")) {
+							cards drawn = drawCard(Chance);
+							System.out.println("The card you drew was : " + drawn.getText());
+					} else if (mb.getSpace(players[turnTracker].getLocation()-1).equals("Community Chest")) {
+							cards drawn = drawCard(CommunityChest);
+							System.out.println("The card you drew was : " + drawn.getText());
+							
 					}
 					break;
 
@@ -105,7 +128,7 @@ public class monopolyRunner {
 						players[turnTracker].purchaseHotels();
 					}
 					break;
-					
+
 				// ends the turn
 				case 3:
 					if (!players[turnTracker].getRolled()) {
@@ -118,7 +141,7 @@ public class monopolyRunner {
 				// removes player from game
 				case 4:
 					break;
-					
+
 				// mortgage / unmortgage
 				case 5:
 					players[turnTracker].mortgageMenu();
@@ -128,7 +151,7 @@ public class monopolyRunner {
 				case 6:
 					// trade(players[turnTracker]);
 					break;
-					
+
 				// sell houses and hotels
 				case 7:
 					// players[turnTracker].sell();
@@ -147,10 +170,53 @@ public class monopolyRunner {
 				}
 			} while (choice != 3);
 			players[turnTracker].flipRoll();
+			players[turnTracker].setCanRoll(true);
 			turnTracker++;
 		} while (!isOver());
 	}
-
+	private static cards drawCard(ArrayList<cards> list) {
+		int ranSpot = (int)(Math.random() * (list.size()));
+		return list.get(ranSpot);
+	}
+	private static void addChanceCards() {
+		 Chance.add(new cards("Advance to Go (Collect $200)"));
+		 Chance.add(new cards("Advance to Go (Collect $200)"));
+		 Chance.add(new cards("Advance to Illinois Ave. - If you pass Go, collect $200."));
+		 Chance.add(new cards("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown."));
+		 Chance.add(new cards("Advance to St. Charles Place – If you pass Go, collect $200"));
+		 Chance.add(new cards("Advance token to the nearest Railroad and pay owner twice the rental to which he/she is otherwise entitled. If Railroad is unowned, you may buy it from the Bank."));
+		 Chance.add(new cards("Bank pays you dividend of $50."));
+		 Chance.add(new cards("Get out of Jail Free – This card may be kept until needed, or traded/sold."));
+		 Chance.add(new cards("Go Back 3 Spaces."));
+		 Chance.add(new cards("Go to Jail – Go directly to Jail – Do not pass Go, do not collect $200."));
+		 Chance.add(new cards("Make general repairs on all your property – $25 for each house $100 for each hotel"));
+		 Chance.add(new cards("Pay poor tax of $15"));
+		 Chance.add(new cards("Take a trip to Reading Railroad – If you pass Go, collect $200"));
+		 Chance.add(new cards("Take a walk on the Boardwalk – Advance token to Boardwalk"));
+		 Chance.add(new cards("You have been elected Chairman of the Board – Pay each player $50"));
+		 Chance.add(new cards("Your building loan matures – Collect $150 "));
+		 Chance.add(new cards("You have won a crossword competition - Collect $100"));
+	}
+	
+	private static void addCommunityChestCards(){
+		CommunityChest.add(new cards("Advance to Go (Collect $200)"));
+		CommunityChest.add(new cards("Bank error in your favor – Collect $200"));
+		CommunityChest.add(new cards("Doctor's fees– Pay $50"));
+		CommunityChest.add(new cards("Get out of jail free – this card may be kept until needed, or traded/sold"));
+		CommunityChest.add(new cards("Go to jail – go directly to jail – Do not pass Go, do not collect $200"));
+		CommunityChest.add(new cards("It is your birthday Collect $10 from each player"));
+		CommunityChest.add(new cards("Grand Opera Night – collect $50 from every player for opening night seats"));
+		CommunityChest.add(new cards("Income Tax refund – collect $20"));
+		CommunityChest.add(new cards("Life Insurance Matures – collect $100"));
+		CommunityChest.add(new cards("Pay Hospital Fees of $100 "));
+		CommunityChest.add(new cards("Pay School Fees of $50"));
+		CommunityChest.add(new cards("Receive $25 Consultancy Fee"));
+		CommunityChest.add(new cards("You are assessed for street repairs – $40 per house, $115 per hotel"));
+		CommunityChest.add(new cards("You have won second prize in a beauty contest– collect $10"));
+		CommunityChest.add(new cards("You inherit $100"));
+		CommunityChest.add(new cards("From sale of stock you get $50"));
+		CommunityChest.add(new cards("Holiday Fund matures - Receive $100"));
+	}
 	private static void jailDoublesRoll(int player) {
 		Random genRan = new Random();
 		int rollingDice1 = genRan.nextInt(6) + 1;
@@ -158,21 +224,37 @@ public class monopolyRunner {
 		if (rollingDice1 == rollingDice2) {
 			System.out.println("You rolled doubles, you are no longer in jail.");
 			players[player].getOutOfJail();
+			players[player].setCanRoll(false);
 			players[player].flipRoll();
 		} else if (players[player].getJailTurn() == 3) {
 			System.out.println("You didn't roll doubles and it is your third turn in jail.");
 			System.out.println("You get out of jail, but have to pay $50");
 			players[player].getOutOfJail();
+			players[player].setCanRoll(false);
 			players[player].pay(-50);
 			players[player].flipRoll();
 		} else {
 			System.out.println("You didn't roll doubles.");
 			players[player].incJailTurn();
+			players[player].flipRoll();
+			players[player].setCanRoll(false);
 		}
 	}
 
-	private static void auction(Deeds sellProperty) {
-
+	private static void auction(Deeds sellProperty, thePlayer[] participants, thePlayer seller) {
+		ArrayList<thePlayer> nonParticipants = new ArrayList<thePlayer>();
+		nonParticipants.add(seller);
+		String[] participantChoices ={"Bid", "Give Up" , "Look at Stats"};
+		String maxBidPlayer = "";
+		String choice = "";
+		int maxBid = 0;
+		int curBid = 0;
+		while(maxBid == 0 || participants.length > 1){
+			
+			for(thePlayer curBidder : participants){
+				
+			}
+		}
 	}
 
 	public static int pickingGamePiece() throws IOException {
@@ -196,6 +278,7 @@ public class monopolyRunner {
 			if (doubles == 3) {
 				System.out.println("You rolled doubles three times and are now in jail.");
 				players[player].goToJail();
+				players[player].setCanRoll(false);
 				doubles = 0;
 			} else {
 				System.out.println("Move " + (rollingDice1 + rollingDice2) + " spaces.");
@@ -204,6 +287,7 @@ public class monopolyRunner {
 			}
 
 		} else {
+			doubles = 0;
 			System.out.println("Move " + (rollingDice1 + rollingDice2) + " spaces.");
 			players[player].move(sumOfRolls);
 			players[player].flipRoll();
@@ -256,5 +340,6 @@ public class monopolyRunner {
 		notBuyableSpaces.add("Free Parking");
 		notBuyableSpaces.add("Go To Jail");
 		notBuyableSpaces.add("Just Visiting / In Jail");
+		notBuyableSpaces.add("In Jail");
 	}
 }

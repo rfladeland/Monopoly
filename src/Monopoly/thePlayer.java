@@ -17,6 +17,7 @@ public class thePlayer {
 	private gamePieces piece;
 	private boolean hasRolled = false;
 	private boolean playerInJail = false;
+	private boolean canRoll = true;
 	private int jailTurnCounter = 0;
 	private int money;
 	private int location;
@@ -80,6 +81,7 @@ public class thePlayer {
 
 	public void getOutOfJail() {
 		playerInJail = false;
+		location = 11;
 	}
 
 	public int getLocation() {
@@ -89,7 +91,12 @@ public class thePlayer {
 	public boolean getRolled() {
 		return hasRolled;
 	}
-
+	
+	public void addCard(cards card){
+		ownedCards.add(card);
+	}
+	
+	
 	public void mortgageMenu() throws IOException {
 		String[] mortMenu = { "Mortgage", "Pay off mortgage" };
 		System.out.println("What would you like to do?");
@@ -305,4 +312,10 @@ public class thePlayer {
 			}
 		}
 	}
+	public boolean getCanRoll(){
+		return canRoll;
+	}
+	public void setCanRoll(boolean b) {
+		canRoll = b;	
+		}
 }

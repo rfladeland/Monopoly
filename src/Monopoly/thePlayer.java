@@ -130,7 +130,7 @@ public class thePlayer {
 	}
 
 	public void buyPiece(Deeds property) {
-		System.out.println("You paid " + property.getPrice() + " for " + property.getName());
+		System.out.println("You paid $" + property.getPrice() + " for " + property.getName());
 		ownedProperties.add(property);
 		money -= property.getPrice();
 	}

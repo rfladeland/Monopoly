@@ -323,13 +323,10 @@ public class thePlayer {
 		//sees whether or not the property is mortgaged
 		//return boolean
 		//(for rent)
-		//isMortgaged is the placeholder boolean that indicates if a property is mortgaged 
-		if(ownedProperties.contains(title) && isMortgaged <= true){
-			//returns true if a property is mortgaged
-			return true;
-		}else{
-			//returns false if a property is not mortgaged
+
+		while(ownedProperties.get(ownedProperties.size()).getName().equals(title)){
 			return false;
 		}
+		return false;
 	}
 }

@@ -333,7 +333,7 @@ public class thePlayer {
 			tracker++;
 		}
 		System.out.println("Which property would you like to auction off?");
-		String chosenDeed = tempProperties[ConsoleUI.promptForMenuSelection(tempProperties, false)];
+		String chosenDeed = tempProperties[ConsoleUI.promptForMenuSelection(tempProperties, false)-1];
 		for (Deeds property : ownedProperties) {
 			if (property.getName().equals(chosenDeed)) {
 				return property;

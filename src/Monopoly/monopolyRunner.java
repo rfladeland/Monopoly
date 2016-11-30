@@ -167,7 +167,7 @@ public class monopolyRunner {
 				// No buildings are allowed
 				case 6:
 					Deeds chosenProperty = players[turnTracker].chooseAuctionProperty();
-					
+					auction(chosenProperty, players, players[turnTracker]);
 					break;
 				}
 			} while (choice != 3);
@@ -266,18 +266,21 @@ public class monopolyRunner {
 						nonParticipants.add(curBidder);
 						participants = removeBidder(participants, curBidder.getPiece());
 					}
+					break;
 				case 2:
 					System.out.println(curBidder.getPiece() + ", you have quit this auction.");
 					nonParticipants.add(curBidder);
 					participants = removeBidder(participants, curBidder.getPiece());
+					break;
 				case 3:
 					System.out.println("The Deed name is " + sellProperty.getName());
 					System.out.println("The base rent is " + sellProperty.getCurRent());
 					System.out.println("Houses and Hotels cost " + sellProperty.getHouseHotelCost());
 					System.out.println("Mortgages for " + sellProperty.getMortgage());
+					break;
 				}
 			}
-			if(participants.length <= 1 && maxBid == 0){
+			if(participants.length < 1 && maxBid == 0){
 				System.out.println("Someone has to buy the property, even if it's for $1");
 				thePlayer[] tempPart = new thePlayer[nonParticipants.size()-1];
 				for(int i =0; i<nonParticipants.size() ; i++){

@@ -324,7 +324,7 @@ public class thePlayer {
 		//return boolean
 		//(for rent)
 
-		while(ownedProperties.get(ownedProperties.size()).getName().equals(title)){
+		for(ownedProperties.get(ownedProperties.size()).getName().equals(title)){
 			return false;
 		}
 		return false;

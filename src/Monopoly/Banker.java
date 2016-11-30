@@ -98,7 +98,7 @@ public class Banker {
 		//sees whether or not the property is owned
 		//return boolean if it's not
 		
-		while(properties.contains(title)){
+		for(properties.contains(title)){
 			return false;
 		}
 		return false;

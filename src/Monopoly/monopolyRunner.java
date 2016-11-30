@@ -19,7 +19,7 @@ public class monopolyRunner {
 	private static monoBoard mb = new monoBoard();
 	private static Banker bank = new Banker();
 	private static thePlayer[] players;
-	private static String[] playerMenu = { "Roll", "Buy houses/ hotels", "End Turn", "Quit", "Mortgage / Unmortgage" };
+	private static String[] playerMenu = { "Roll", "Buy houses/ hotels", "End Turn", "Quit", "Mortgage / Unmortgage", "Auction A Property" };
 	private static String[] listOfPieces = { "Battleship", "Cannon", "Car", "Dog", "Hat", "Shoe", "Thimble",
 			"Wheelbarrow" };
 	private static int doubles = 0;
@@ -148,7 +148,7 @@ public class monopolyRunner {
 					break;
 
 				// trade
-				case 6:
+				case 9:
 					// trade(players[turnTracker]);
 					break;
 
@@ -165,7 +165,9 @@ public class monopolyRunner {
 
 				// Auction off specific deeds that you own
 				// No buildings are allowed
-				case 9:
+				case 6:
+					Deeds chosenProperty = players[turnTracker].chooseAuctionProperty();
+					
 					break;
 				}
 			} while (choice != 3);
@@ -265,6 +267,7 @@ public class monopolyRunner {
 						participants = removeBidder(participants, curBidder.getPiece());
 					}
 				case 2:
+					System.out.println(curBidder.getPiece() + ", you have quit this auction.");
 					nonParticipants.add(curBidder);
 					participants = removeBidder(participants, curBidder.getPiece());
 				case 3:
@@ -274,7 +277,33 @@ public class monopolyRunner {
 					System.out.println("Mortgages for " + sellProperty.getMortgage());
 				}
 			}
+			if(participants.length <= 1 && maxBid == 0){
+				System.out.println("Someone has to buy the property, even if it's for $1");
+				thePlayer[] tempPart = new thePlayer[nonParticipants.size()-1];
+				for(int i =0; i<nonParticipants.size() ; i++){
+					if(!nonParticipants.get(i).getPiece().equals(seller)){
+						tempPart[i] = nonParticipants.get(i);
+						nonParticipants.remove(i);
+					}
+				}
+			}
 		}
+		System.out.println(maxBidPlayer + ", you have won the auction and bought " + sellProperty.getName() + " for " + maxBid);
+		for(thePlayer player : participants){
+			if(player.getPiece().equals(maxBidPlayer)){
+				player.buyPiece(sellProperty);
+			}
+		}
+		thePlayer[] tempArr = new thePlayer[participants.length + nonParticipants.size()];
+		int i =0;
+		for(thePlayer player : participants){
+			tempArr[i] = player;
+			i++;
+		}for(thePlayer player : nonParticipants){
+			tempArr[i] = player;
+			i++;
+		}
+	participants = tempArr;
 	}
 
 	private static thePlayer[] removeBidder(thePlayer[] participants, String piece) {

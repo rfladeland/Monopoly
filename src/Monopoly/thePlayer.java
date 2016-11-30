@@ -91,12 +91,11 @@ public class thePlayer {
 	public boolean getRolled() {
 		return hasRolled;
 	}
-	
-	public void addCard(cards card){
+
+	public void addCard(cards card) {
 		ownedCards.add(card);
 	}
-	
-	
+
 	public void mortgageMenu() throws IOException {
 		String[] mortMenu = { "Mortgage", "Pay off mortgage" };
 		System.out.println("What would you like to do?");
@@ -112,26 +111,28 @@ public class thePlayer {
 				}
 				String property = ownedProperties.get(ConsoleUI.promptForMenuSelection(stringProperties, false))
 						.getName();
-				
-//				for(Deeds mortgage : mortgagedProperties){ //setting a name with the arrayList for mortgagedProperties
-//					if(mortgage.isMortgaged = false){ //isMortgaged boolean from Deeds class
-//						//mortgages the property
-//						//getting the mortgage amount from deeds
-//						isMortgaged = true; //isMortgaged boolean from Deeds class
-//					}else{
-//						//property is already mortgaged
-//						System.out.println("Property is already mortgaged.");
-//					}
-//				}
-				
+
+				// for(Deeds mortgage : mortgagedProperties){ //setting a name
+				// with the arrayList for mortgagedProperties
+				// if(mortgage.isMortgaged = false){ //isMortgaged boolean from
+				// Deeds class
+				// //mortgages the property
+				// //getting the mortgage amount from deeds
+				// isMortgaged = true; //isMortgaged boolean from Deeds class
+				// }else{
+				// //property is already mortgaged
+				// System.out.println("Property is already mortgaged.");
+				// }
+				// }
+
 			case 2:
-//				if(isMortgaged = false){
-//					//pays base price
-//					money -= mortgagedPrice; //placeholder
-//				}else{
-//					//pays mortgaged price
-//					money -= rent; //placeholder???
-//				}
+				// if(isMortgaged = false){
+				// //pays base price
+				// money -= mortgagedPrice; //placeholder
+				// }else{
+				// //pays mortgaged price
+				// money -= rent; //placeholder???
+				// }
 			}
 		} else {
 			System.out.println("You don't have anything to mortgage.");
@@ -311,25 +312,54 @@ public class thePlayer {
 			}
 		}
 	}
-	public boolean getCanRoll(){
+
+	public boolean getCanRoll() {
 		return canRoll;
 	}
+
 	public void setCanRoll(boolean b) {
-		canRoll = b;	
-		}
-	
-	public boolean checkPropertyOwned(String title){
-		//goes through mortgaged and unmortgaged
-		//sees whether or not the property is mortgaged
-		//return boolean
-		//(for rent)
-		//isMortgaged is the placeholder boolean that indicates if a property is mortgaged 
-		if(ownedProperties.contains(title) && isMortgaged <= true){
-			//returns true if a property is mortgaged
-			return true;
-		}else{
-			//returns false if a property is not mortgaged
-			return false;
-		}
+		canRoll = b;
 	}
+
+	public Deeds chooseAuctionProperty() throws IOException {
+		String[] tempProperties = new String[ownedProperties.size() + mortgagedProperties.size()];
+		int tracker = 0;
+		for (Deeds property : ownedProperties) {
+			tempProperties[tracker] = property.getName();
+			tracker++;
+		}
+		for (Deeds property : mortgagedProperties) {
+			tempProperties[tracker] = property.getName();
+			tracker++;
+		}
+		System.out.println("Which property would you like to auction off?");
+		String chosenDeed = tempProperties[ConsoleUI.promptForMenuSelection(tempProperties, false)];
+		for (Deeds property : ownedProperties) {
+			if (property.getName().equals(chosenDeed)) {
+				return property;
+			}
+		}
+		for (Deeds property : mortgagedProperties) {
+			if (property.getName().equals(chosenDeed)) {
+				return property;
+			}
+		}
+		return null;
+	}
+
+	// public boolean checkPropertyOwned(String title){
+	// goes through mortgaged and unmortgaged
+	// sees whether or not the property is mortgaged
+	// return boolean
+	// (for rent)
+	// isMortgaged is the placeholder boolean that indicates if a property is
+	// mortgaged
+	// if(ownedProperties.contains(title) && isMortgaged <= true){
+	// returns true if a property is mortgaged
+	// return true;
+	// }else{
+	// returns false if a property is not mortgaged
+	// return false;
+	// }
+	// }
 }

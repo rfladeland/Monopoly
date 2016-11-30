@@ -98,8 +98,8 @@ public class Banker {
 		//sees whether or not the property is owned
 		//return boolean if it's not
 		
-		for(properties.contains(title)){
-			return false;
+		for(int i = 0; i < properties.size(); i++){
+			
 		}
 		return false;
 	}

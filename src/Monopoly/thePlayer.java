@@ -321,11 +321,11 @@ public class thePlayer {
 	public boolean checkPropertyOwned(String title){
 		//goes through mortgaged and unmortgaged
 		//sees whether or not the property is mortgaged
-		//return boolean
+		//return boolean as false
 		//(for rent)
 
-		for(ownedProperties.get(ownedProperties.size()).getName().equals(title)){
-			return false;
+		for(int i = 0; i < ownedProperties.size(); i++){
+			ownedProperties.get(i).getName().equals(title);
 		}
 		return false;
 	}

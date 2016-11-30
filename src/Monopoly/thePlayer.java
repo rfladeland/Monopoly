@@ -346,6 +346,18 @@ public class thePlayer {
 		}
 		return null;
 	}
+	public boolean checkPropertyOwned(String title){
+		//goes through mortgaged and unmortgaged
+		//sees whether or not the property is mortgaged
+		//return boolean as false
+		//(for rent)
+
+		for(int i = 0; i < ownedProperties.size(); i++){
+			ownedProperties.get(i).getName().equals(title);
+		}
+		return false;
+
+	}
 
 	// public boolean checkPropertyOwned(String title){
 	// goes through mortgaged and unmortgaged

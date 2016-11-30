@@ -147,10 +147,14 @@ public class thePlayer {
 		money += amount;
 	}
 
-	public void buyPiece(Deeds property) {
-		System.out.println("You paid $" + property.getPrice() + " for " + property.getName());
-		ownedProperties.add(property);
-		money -= property.getPrice();
+	public void buyPiece(Deeds property, boolean payHere) {
+		if (payHere) {
+			System.out.println("You paid $" + property.getPrice() + " for " + property.getName());
+			ownedProperties.add(property);
+			money -= property.getPrice();
+		} else {
+			ownedProperties.add(property);
+		}
 	}
 
 	public boolean inJail() {
@@ -333,7 +337,7 @@ public class thePlayer {
 			tracker++;
 		}
 		System.out.println("Which property would you like to auction off?");
-		String chosenDeed = tempProperties[ConsoleUI.promptForMenuSelection(tempProperties, false)-1];
+		String chosenDeed = tempProperties[ConsoleUI.promptForMenuSelection(tempProperties, false) - 1];
 		for (Deeds property : ownedProperties) {
 			if (property.getName().equals(chosenDeed)) {
 				return property;
@@ -346,13 +350,14 @@ public class thePlayer {
 		}
 		return null;
 	}
-	public boolean checkPropertyOwned(String title){
-		//goes through mortgaged and unmortgaged
-		//sees whether or not the property is mortgaged
-		//return boolean as false
-		//(for rent)
 
-		for(int i = 0; i < ownedProperties.size(); i++){
+	public boolean checkPropertyOwned(String title) {
+		// goes through mortgaged and unmortgaged
+		// sees whether or not the property is mortgaged
+		// return boolean as false
+		// (for rent)
+
+		for (int i = 0; i < ownedProperties.size(); i++) {
 			ownedProperties.get(i).getName().equals(title);
 		}
 		return false;

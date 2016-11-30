@@ -19,7 +19,7 @@ public class monopolyRunner {
 	private static monoBoard mb = new monoBoard();
 	private static Banker bank = new Banker();
 	private static thePlayer[] players;
-	private static String[] playerMenu = { "Roll", "Buy houses/ hotels", "End Turn", "Quit", "Mortgage / Unmortgage", "Auction A Property" };
+	private static String[] playerMenu = { "Roll", "Buy houses/ hotels", "End Turn", "Quit", "Mortgage / Unmortgage"};
 	private static String[] listOfPieces = { "Battleship", "Cannon", "Car", "Dog", "Hat", "Shoe", "Thimble",
 			"Wheelbarrow" };
 	private static int doubles = 0;
@@ -96,7 +96,7 @@ public class monopolyRunner {
 							&& players[turnTracker].getMoney() >= bank.sellProperty(players[turnTracker].getLocation())
 									.getCurRent()) {
 						if (ConsoleUI.promptForBool("Would you like to buy this property?(Y/N)", "Y", "N")) {
-							players[turnTracker].buyPiece(bank.sellProperty(players[turnTracker].getLocation()));
+							players[turnTracker].buyPiece(bank.sellProperty(players[turnTracker].getLocation()), true);
 							bank.removePiece(players[turnTracker].getLocation());
 						} else {
 							auction(bank.sellProperty(players[turnTracker].getLocation()), players , players[turnTracker]);
@@ -165,10 +165,6 @@ public class monopolyRunner {
 
 				// Auction off specific deeds that you own
 				// No buildings are allowed
-				case 6:
-					Deeds chosenProperty = players[turnTracker].chooseAuctionProperty();
-					auction(chosenProperty, players, players[turnTracker]);
-					break;
 				}
 			} while (choice != 3);
 			players[turnTracker].flipRoll();
@@ -253,12 +249,12 @@ public class monopolyRunner {
 		int maxBid = 0;
 		while(maxBid == 0 || participants.length > 1){
 			for(thePlayer curBidder : participants){
-				System.out.println("What would you like to do?");
+				System.out.println(curBidder.getPiece() + ", what would you like to do?");
 				choice = ConsoleUI.promptForMenuSelection(participantChoices, false);
 				switch(choice){
 				case 1:
 					if(curBidder.getMoney() > maxBid){
-					maxBid = ConsoleUI.promptForInt("How much would you like to bid?", maxBid + 1, curBidder.getMoney());
+					maxBid = ConsoleUI.promptForInt(curBidder.getPiece() + ", how much would you like to bid?", maxBid + 1, curBidder.getMoney());
 					maxBidPlayer = curBidder.getPiece();
 					System.out.println(curBidder.getPiece() + " you bid $" + maxBid + ".");
 					}else{
@@ -294,7 +290,8 @@ public class monopolyRunner {
 		System.out.println(maxBidPlayer + ", you have won the auction and bought " + sellProperty.getName() + " for " + maxBid);
 		for(thePlayer player : participants){
 			if(player.getPiece().equals(maxBidPlayer)){
-				player.buyPiece(sellProperty);
+				player.pay(-maxBid);
+				player.buyPiece(sellProperty, false);
 			}
 		}
 		thePlayer[] tempArr = new thePlayer[participants.length + nonParticipants.size()];

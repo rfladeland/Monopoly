@@ -177,7 +177,7 @@ public class thePlayer {
 			i++;
 		}
 		System.out.println("Which space would you like to buy a house for?");
-		int chosenDeed = ConsoleUI.promptForMenuSelection(tempPlayerDeeds, true);
+		int chosenDeed = ConsoleUI.promptForMenuSelection(tempPlayerDeeds, true)-1;
 		if (chosenDeed == 0) {
 			return;
 		}

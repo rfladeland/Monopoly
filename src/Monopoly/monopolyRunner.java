@@ -256,7 +256,7 @@ public class monopolyRunner {
 				switch(choice){
 				case 1:
 					if(curBidder.getMoney() > maxBid){
-					maxBid = ConsoleUI.promptForInt("How much would you like to bid?", maxBid, curBidder.getMoney());
+					maxBid = ConsoleUI.promptForInt("How much would you like to bid?", maxBid + 1, curBidder.getMoney());
 					maxBidPlayer = curBidder.getPiece();
 					System.out.println(curBidder.getPiece() + " you bid $" + maxBid + ".");
 					}else{
@@ -277,6 +277,17 @@ public class monopolyRunner {
 		}
 	}
 
+	private static thePlayer[] removeBidder(thePlayer[] participants, String piece) {
+		thePlayer[] tempArr = new thePlayer[participants.length-1];
+		int placeTacker =0;
+		for(thePlayer player : participants){
+			if(!player.getPiece().equals(piece)){
+			tempArr[placeTacker] = player;
+			placeTacker ++;
+			}
+		}
+		return tempArr;
+	}
 	public static int pickingGamePiece() throws IOException {
 
 		// player picks their game piece and will be referred to that game piece
